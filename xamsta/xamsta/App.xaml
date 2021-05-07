@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application
+    x:Class="xamsta.App"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:sh="http://sharpnado.com">
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <Color x:Key="UWPBlue">#2196F3</Color>
+
+            <Style TargetType="NavigationPage">
+                <Setter Property="NavigationPage.HasNavigationBar" Value="False" />
+                <Setter Property="NavigationPage.HasBackButton" Value="False" />
+                <Setter Property="BarTextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+                <Setter Property="ios:NavigationPage.StatusBarTextColorMode" Value="MatchNavigationBarTextLuminosity" />
+            </Style>
+
+            <Style TargetType="Button">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+                <Setter Property="TextTransform" Value="None" />
+            </Style>
+            <Style TargetType="Label">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+            </Style>
+            <Style TargetType="RefreshView">
+                <Setter Property="BackgroundColor" Value="{OnPlatform Default={AppThemeBinding Dark=#1b1b1b, Light=#f3f3f3}, UWP=Transparent}" />
+                <Setter Property="RefreshColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+            </Style>
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Black, Light=White}" />
+            </Style>
+            <Style TargetType="Frame">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=#262626, Light=#F2F2F2}" />
+            </Style>
+            <Style TargetType="Grid">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Dark=Black, Light=White}" />
+            </Style>
+            <Style TargetType="RadioButton">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+            </Style>
+            <Style TargetType="Entry">
+                <Setter Property="TextColor" Value="{AppThemeBinding Dark=White, Light=Black}" />
+                <Setter Property="PlaceholderColor" Value="Gray" />
+            </Style>
+
+            <Style
+                x:Key="DefaultFrame"
+                Class="blur"
+                TargetType="sh:MaterialFrame">
+                <Setter Property="MaterialTheme" Value="{x:DynamicResource BlurTheme}" />
+                <Setter Property="MaterialBlurStyle" Value="{AppThemeBinding Dark=Dark, Light=ExtraLight}" />
+                <Setter Property="Margin" Value="0" />
+            </Style>
+            <Style TargetType="sh:MaterialFrame">
+                <Setter Property="CornerRadius" Value="0" />
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="MaterialBlurStyle" Value="{AppThemeBinding Dark=Dark, Light=ExtraLight}" />
+            </Style>
+            <x:String x:Key="BlurTheme">AcrylicBlur</x:String>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

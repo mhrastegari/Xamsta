@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<rg:PopupPage
+    x:Class="xamsta.Views.DetailsPopupView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:rg="http://rotorgames.com"
+    xmlns:sh="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
+    xmlns:vm="clr-namespace:xamsta.ViewModels"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    ios:Page.UseSafeArea="True">
+    <rg:PopupPage.BindingContext>
+        <vm:DetailsPopupViewModel />
+    </rg:PopupPage.BindingContext>
+    <rg:PopupPage.Animation>
+        <rg:MoveAnimation
+            DurationIn="250"
+            DurationOut="250"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </rg:PopupPage.Animation>
+    <sh:MaterialFrame
+        Margin="0,0,0,-50"
+        CornerRadius="15"
+        HeightRequest="{OnIdiom Phone=400,
+                                Default=555}"
+        HorizontalOptions="{OnIdiom Phone=FillAndExpand,
+                                    Desktop=CenterAndExpand}"
+        Style="{StaticResource DefaultFrame}"
+        VerticalOptions="EndAndExpand"
+        WidthRequest="{OnIdiom Phone=305,
+                               Default=800}">
+        <StackLayout Padding="0,15,0,0" Spacing="10">
+            <StackLayout Margin="15,0" Spacing="15">
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <ImageButton
+                        CornerRadius="40"
+                        HeightRequest="80"
+                        HorizontalOptions="Start"
+                        IsEnabled="False"
+                        Source="{Binding ProfilePicUrl}"
+                        VerticalOptions="Start"
+                        WidthRequest="80" />
+                    <Image
+                        HeightRequest="15"
+                        HorizontalOptions="Start"
+                        IsVisible="{Binding IsVerified}"
+                        Source="verified.png"
+                        TranslationX="-30"
+                        TranslationY="-3"
+                        VerticalOptions="EndAndExpand"
+                        WidthRequest="15" />
+                    <StackLayout Orientation="Horizontal">
+                        <StackLayout VerticalOptions="CenterAndExpand">
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="21"
+                                HorizontalOptions="Start"
+                                Text="{Binding FullName}"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="160" />
+                            <Label
+                                FontSize="14"
+                                Text="{Binding UserName, StringFormat='@{0}'}"
+                                VerticalOptions="Center" />
+                        </StackLayout>
+                    </StackLayout>
+                    <Frame
+                        xct:TouchEffect.NativeAnimation="True"
+                        CornerRadius="17"
+                        HasShadow="False"
+                        HeightRequest="34"
+                        HorizontalOptions="EndAndExpand"
+                        VerticalOptions="StartAndExpand"
+                        WidthRequest="34">
+                        <Label
+                            FontSize="30"
+                            HorizontalOptions="CenterAndExpand"
+                            HorizontalTextAlignment="Center"
+                            Text="⨯"
+                            TextColor="Gray"
+                            TranslationX="{OnPlatform Default=0,
+                                                      Android=.5}"
+                            TranslationY="{OnPlatform Default=-3,
+                                                      Android=-4,
+                                                      iOS=-5}"
+                            VerticalOptions="CenterAndExpand"
+                            VerticalTextAlignment="Center" />
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ClosePopupCommand}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </StackLayout>
+                <Label
+                    FontSize="12"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding Biography}"
+                    VerticalOptions="Start" />
+                <Label
+                    Margin="0,-10,0,0"
+                    xct:TouchEffect.NativeAnimation="True"
+                    FontSize="12"
+                    HorizontalOptions="StartAndExpand"
+                    Text="{Binding ExternalUrl}"
+                    TextColor="#2196F3"
+                    VerticalOptions="Start">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding OpenLinkCommand}" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </StackLayout>
+            <StackLayout
+                Padding="10,5"
+                Orientation="Horizontal"
+                VerticalOptions="EndAndExpand">
+                <StackLayout HorizontalOptions="CenterAndExpand" WidthRequest="80">
+                    <Label
+                        FontSize="12"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding MediaCount}" />
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Posts" />
+                </StackLayout>
+                <BoxView
+                    BackgroundColor="Gray"
+                    HeightRequest="15"
+                    HorizontalOptions="CenterAndExpand"
+                    Opacity=".5"
+                    WidthRequest=".5" />
+                <StackLayout HorizontalOptions="CenterAndExpand" WidthRequest="85">
+                    <Label
+                        FontSize="12"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding FollowerCount}" />
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Followers" />
+                </StackLayout>
+                <BoxView
+                    BackgroundColor="Gray"
+                    HeightRequest="15"
+                    HorizontalOptions="CenterAndExpand"
+                    Opacity=".5"
+                    WidthRequest=".5" />
+                <StackLayout HorizontalOptions="CenterAndExpand" WidthRequest="80">
+                    <Label
+                        FontSize="12"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="{Binding FollowingCount}" />
+                    <Label
+                        FontSize="14"
+                        HorizontalOptions="CenterAndExpand"
+                        Text="Followings" />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout
+                Orientation="Vertical"
+                Spacing="0"
+                VerticalOptions="End">
+                <BoxView
+                    BackgroundColor="Gray"
+                    HeightRequest=".5"
+                    Opacity=".5"
+                    VerticalOptions="EndAndExpand" />
+                <Button
+                    BackgroundColor="Transparent"
+                    BorderColor="Transparent"
+                    Command="{Binding OpenProfileCommand}"
+                    HeightRequest="50"
+                    Text="Open Profile"
+                    TextColor="Accent"
+                    VerticalOptions="End" />
+            </StackLayout>
+            <BoxView
+                Margin="0,-10,0,0"
+                BackgroundColor="{OnPlatform Default=Black,
+                                             iOS=Transparent}"
+                HeightRequest="50" />
+        </StackLayout>
+        <sh:MaterialFrame.GestureRecognizers>
+            <SwipeGestureRecognizer Command="{Binding ClosePopupCommand}" Direction="Down" />
+        </sh:MaterialFrame.GestureRecognizers>
+    </sh:MaterialFrame>
+</rg:PopupPage>

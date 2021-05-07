@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="xamsta.Views.SettingsView"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+    xmlns:sh="http://sharpnado.com"
+    xmlns:vm="clr-namespace:xamsta.ViewModels"
+    ios:Page.ModalPresentationStyle="FormSheet"
+    x:DataType="vm:SettingsViewModel">
+    <ContentPage.BindingContext>
+        <vm:SettingsViewModel />
+    </ContentPage.BindingContext>
+    <Grid>
+        <ScrollView
+            Margin="15,0"
+            Padding="{OnPlatform Default='0,110,15,15',
+                                 iOS='0,90,15,15',
+                                 UWP='0,138,15,15'}"
+            VerticalScrollBarVisibility="Never">
+            <StackLayout>
+                <Label FontSize="28" Text="Appearance" />
+                <StackLayout>
+                    <Label Text="Transeparency effects" />
+                    <Switch
+                        HorizontalOptions="Start"
+                        IsToggled="{Binding IsAcrylic}"
+                        OnColor="Accent" />
+                </StackLayout>
+                <BoxView
+                    Margin="5,25,-10,5"
+                    BackgroundColor="{AppThemeBinding Dark=#1b1b1b,
+                                                      Light=LightGray}"
+                    HeightRequest="1" />
+                <Label
+                    Margin="0,20,0,0"
+                    FontSize="28"
+                    Text="Mode" />
+                <StackLayout Spacing="0">
+                    <RadioButton Content="Light" IsChecked="{Binding LightTheme}" />
+                    <RadioButton Content="Dark" IsChecked="{Binding DarkTheme}" />
+                    <RadioButton Content="Use system setting" IsChecked="{Binding DefaultTheme}" />
+                </StackLayout>
+                <BoxView
+                    Margin="5,25,-10,5"
+                    BackgroundColor="{AppThemeBinding Dark=#1b1b1b,
+                                                      Light=LightGray}"
+                    HeightRequest="1" />
+                <Label
+                    Margin="0,20,0,0"
+                    FontSize="28"
+                    Text="Account" />
+                <StackLayout Margin="0,0,0,0" Spacing="0">
+                    <Button
+                        BackgroundColor="Transparent"
+                        Command="{Binding ViewAccountCommand}"
+                        CornerRadius="3"
+                        HorizontalOptions="Start"
+                        Text="View account"
+                        TextColor="Accent" />
+                    <Button
+                        Margin="{OnPlatform Android='-10,-15,0,0',
+                                            macOS='0,0,0,0',
+                                            Default='0,-10,0,0'}"
+                        BackgroundColor="Transparent"
+                        Command="{Binding LogoutCommand}"
+                        CornerRadius="3"
+                        HorizontalOptions="Start"
+                        Text="Logout"
+                        TextColor="Accent" />
+                </StackLayout>
+                <BoxView
+                    Margin="5,25,-10,5"
+                    BackgroundColor="{AppThemeBinding Dark=#1b1b1b,
+                                                      Light=LightGray}"
+                    HeightRequest="1" />
+                <Label
+                    Margin="0,20,0,0"
+                    FontSize="28"
+                    Text="About" />
+                <StackLayout>
+                    <Label>
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span
+                                    FontAttributes="Bold"
+                                    FontSize="18"
+                                    Text="Xamsta " />
+                                <Span FontSize="14" Text=" v1.1.8" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label Margin="0,0,10,0" Text="Xamsta is an unofficial instagram client for Android, iOS, macOS and Windows 10 Devices which can help you to find your unfollowers. &#x0a;This app has been developed via Xamarin.Forms." />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+        <sh:MaterialFrame
+            Padding="{OnPlatform iOS='15,15,5,15',
+                                 Default='15,40,5,15',
+                                 UWP='15,58,5,15'}"
+            HeightRequest="{OnPlatform Default=35,
+                                       UWP=38}"
+            Style="{StaticResource DefaultFrame}"
+            VerticalOptions="Start">
+            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
+                <Label
+                    FontSize="{OnPlatform Default=18,
+                                          UWP=28}"
+                    HorizontalOptions="{OnPlatform Default=CenterAndExpand,
+                                                   UWP=StartAndExpand}"
+                    HorizontalTextAlignment="Center"
+                    Text="Settings"
+                    VerticalOptions="CenterAndExpand" />
+                <Button
+                    Margin="-55,0,0,0"
+                    Padding="0"
+                    BackgroundColor="Transparent"
+                    Command="{Binding DoneCommand}"
+                    CornerRadius="3"
+                    HorizontalOptions="End"
+                    Text="Done"
+                    TextColor="Accent"
+                    VerticalOptions="{OnPlatform Default=CenterAndExpand,
+                                                 UWP=EndAndExpand}"
+                    WidthRequest="55" />
+            </StackLayout>
+        </sh:MaterialFrame>
+    </Grid>
+</ContentPage>

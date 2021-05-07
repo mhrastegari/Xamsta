@@ -1,0 +1,49 @@
+﻿<Application
+    x:Class="xamsta.UWP.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:xamsta.UWP"
+    xmlns:uwp="using:Xamarin.Forms.Platform.UWP">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Default">
+                    <AcrylicBrush
+                        x:Key="MyAcrylicBrush"
+                        BackgroundSource="HostBackdrop"
+                        TintOpacity="0.4" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="MyAcrylicBrush" Color="{ThemeResource SystemColorWindowColor}" />
+                </ResourceDictionary>
+                <ResourceDictionary x:Key="Light">
+                    <AcrylicBrush
+                        x:Key="MyAcrylicBrush"
+                        BackgroundSource="HostBackdrop"
+                        TintOpacity="0.4" />
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <Color x:Key="RadioButtonOuterEllipseStroke">Gray</Color>
+            <Color x:Key="ToggleSwitchStrokeOff">Gray</Color>
+            <Color x:Key="ToggleSwitchKnobFillOff">Gray</Color>
+
+            <Style TargetType="uwp:LayoutRenderer">
+                <Setter Property="Transitions">
+                    <Setter.Value>
+                        <TransitionCollection>
+                            <RepositionThemeTransition />
+                        </TransitionCollection>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="ChildrenTransitions">
+                    <Setter.Value>
+                        <TransitionCollection>
+                            <EntranceThemeTransition />
+                        </TransitionCollection>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
