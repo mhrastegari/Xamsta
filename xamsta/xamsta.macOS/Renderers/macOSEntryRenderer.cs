@@ -1,5 +1,4 @@
-﻿using System.ComponentModel;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
 using xamsta.macOS.Renderers;
 
@@ -8,12 +7,15 @@ namespace xamsta.macOS.Renderers
 {
     public class macOSEntryRenderer : EntryRenderer
     {
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        protected override void OnElementChanged(ElementChangedEventArgs<Entry> e)
         {
-            base.OnElementPropertyChanged(sender, e);
-                
-            Control.Layer.BorderWidth = 0;
-            Control.Bordered = false;
+            base.OnElementChanged(e);
+            if(Control != null && Control.Layer != null)
+            {
+                Control.FocusRingType = AppKit.NSFocusRingType.None;
+                Control.Layer.BorderWidth = 0;
+                Control.Bordered = false;
+            }
         }
     }
 }
