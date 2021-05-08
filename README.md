@@ -7,6 +7,7 @@ This app has been developed via [Xamarin.Forms][8].
   <img width="800px" src='Images/UWP.png'>
   <img height="600px" src='Images/SE2020.PNG'>
   <img width="800px" src='Images/Android.png'>
+  <img width="800px" src='Images/macOS.png'>
 </div>
 
 # Special thanks to
