@@ -30,6 +30,19 @@
                     BindableLayout.ItemsSource="{Binding unFollowersList}"
                     JustifyContent="Center"
                     Wrap="Wrap">
+                    <BindableLayout.EmptyViewTemplate>
+                        <DataTemplate>
+                            <ActivityIndicator
+                                Margin="0,120,0,0"
+                                HeightRequest="80"
+                                HorizontalOptions="CenterAndExpand"
+                                IsRunning="True"
+                                VerticalOptions="CenterAndExpand"
+                                WidthRequest="80"
+                                Color="{AppThemeBinding Dark=White,
+                                                        Light=Black}" />
+                        </DataTemplate>
+                    </BindableLayout.EmptyViewTemplate>
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <Grid
