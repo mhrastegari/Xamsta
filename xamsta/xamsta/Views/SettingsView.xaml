@@ -95,8 +95,8 @@
             </StackLayout>
         </ScrollView>
         <sh:MaterialFrame
-            Padding="{OnPlatform iOS='15,15,5,15',
-                                 Default='15,40,5,15',
+            Padding="{OnPlatform Default='15,15,5,15',
+                                 Android='15,40,5,15',
                                  UWP='15,58,5,15'}"
             HeightRequest="{OnPlatform Default=35,
                                        UWP=38}"

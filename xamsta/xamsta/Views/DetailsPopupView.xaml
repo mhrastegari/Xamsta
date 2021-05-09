@@ -85,6 +85,7 @@
                                                       Android=.5}"
                             TranslationY="{OnPlatform Default=-3,
                                                       Android=-4,
+                                                      macOS=-6,
                                                       iOS=-5}"
                             VerticalOptions="CenterAndExpand"
                             VerticalTextAlignment="Center" />
@@ -180,7 +181,9 @@
                 Margin="0,-10,0,0"
                 BackgroundColor="{OnPlatform Default=Black,
                                              iOS=Transparent}"
-                HeightRequest="50" />
+                HeightRequest="50"
+                IsVisible="{OnPlatform macOS=false,
+                                       Default=true}" />
         </StackLayout>
         <sh:MaterialFrame.GestureRecognizers>
             <SwipeGestureRecognizer Command="{Binding ClosePopupCommand}" Direction="Down" />

@@ -15,7 +15,7 @@
             <StackLayout>
                 <Label
                     Margin="{OnPlatform iOS='15,150,15,0',
-                                        macOS='15,135,15,15',
+                                        macOS='15,135,15,0',
                                         Android='15,160,15,0',
                                         Default='15,135,15,5'}"
                     FontAttributes="Bold"
@@ -46,21 +46,24 @@
                                             HeightRequest="65"
                                             Orientation="Horizontal"
                                             Spacing="15">
-                                            <Frame
+                                            <Image
+                                                Margin="{OnPlatform Default=0,
+                                                                    macOS='20,0,0,0'}"
                                                 BackgroundColor="Transparent"
-                                                CornerRadius="30"
                                                 HeightRequest="60"
                                                 HorizontalOptions="Start"
-                                                IsClippedToBounds="True"
                                                 MinimumHeightRequest="60"
                                                 MinimumWidthRequest="60"
+                                                Source="{Binding ProfilePicUrl}"
                                                 VerticalOptions="CenterAndExpand"
                                                 WidthRequest="60">
-                                                <Image
-                                                    HeightRequest="60"
-                                                    Source="{Binding ProfilePicUrl}"
-                                                    WidthRequest="60" />
-                                            </Frame>
+                                                <Image.Clip>
+                                                    <EllipseGeometry
+                                                        Center="30,30"
+                                                        RadiusX="30"
+                                                        RadiusY="30" />
+                                                </Image.Clip>
+                                            </Image>
                                             <Image
                                                 Margin="-30,0,0,0"
                                                 HeightRequest="15"
@@ -162,21 +165,22 @@
                 Orientation="Horizontal"
                 Spacing="20"
                 VerticalOptions="CenterAndExpand">
-                <Frame
+                <Image
                     BackgroundColor="Gray"
-                    CornerRadius="40"
                     HeightRequest="80"
                     HorizontalOptions="Start"
-                    IsClippedToBounds="True"
                     MinimumHeightRequest="80"
                     MinimumWidthRequest="80"
+                    Source="{Binding ProfilePicUrl}"
                     VerticalOptions="CenterAndExpand"
                     WidthRequest="80">
-                    <Image
-                        HeightRequest="80"
-                        Source="{Binding ProfilePicUrl}"
-                        WidthRequest="80" />
-                </Frame>
+                    <Image.Clip>
+                        <EllipseGeometry
+                            Center="40,40"
+                            RadiusX="40"
+                            RadiusY="40" />
+                    </Image.Clip>
+                </Image>
                 <StackLayout Spacing="0">
                     <Label
                         FontAttributes="Bold"
