@@ -35,14 +35,19 @@
         <StackLayout Padding="0,15,0,0" Spacing="10">
             <StackLayout Margin="15,0" Spacing="15">
                 <StackLayout Orientation="Horizontal" Spacing="10">
-                    <ImageButton
-                        CornerRadius="40"
+                    <Image
                         HeightRequest="80"
                         HorizontalOptions="Start"
-                        IsEnabled="False"
                         Source="{Binding ProfilePicUrl}"
                         VerticalOptions="Start"
-                        WidthRequest="80" />
+                        WidthRequest="80">
+                        <Image.Clip>
+                            <EllipseGeometry
+                                Center="40,40"
+                                RadiusX="40"
+                                RadiusY="40" />
+                        </Image.Clip>
+                    </Image>
                     <Image
                         HeightRequest="15"
                         HorizontalOptions="Start"
