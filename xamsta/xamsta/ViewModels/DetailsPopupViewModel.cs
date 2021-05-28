@@ -6,14 +6,20 @@ using Xamarin.Essentials;
 using System.Windows.Input;
 using System.Threading.Tasks;
 using Rg.Plugins.Popup.Extensions;
+using InstagramApiSharp.Classes;
+using InstagramApiSharp.Classes.Models;
+using System;
 
 namespace xamsta.ViewModels
 {
     public class DetailsPopupViewModel : User
     {
+        public IResult<InstaUserInfo> userInfo { get; set; }
+
         public ICommand OpenLinkCommand { get; set; }
         public ICommand ClosePopupCommand { get; set; }
         public ICommand OpenProfileCommand { get; set; }
+        public ICommand ShareImageCommand { get; set; }
 
         public DetailsPopupViewModel()
         {
@@ -21,11 +27,12 @@ namespace xamsta.ViewModels
             OpenLinkCommand = new Command(OpenLink);
             ClosePopupCommand = new Command(ClosePopup);
             OpenProfileCommand = new Command(OpenProfile);
+            ShareImageCommand = new Command(ShareImage);
         }
 
-        async Task Load()
+        void Load()
         {
-            var userInfo = DetailsPopupView.user;
+            userInfo = DetailsPopupView.user;
             IsVerified = userInfo.Value.IsVerified;
             UserName = userInfo.Value.Username.ToString();
             FullName = userInfo.Value.FullName.ToString();
@@ -35,6 +42,15 @@ namespace xamsta.ViewModels
             ProfilePicUrl = userInfo.Value.ProfilePicUrl.ToString();
             FollowerCount = InstagramService.UserCountFormat(userInfo.Value.FollowerCount);
             FollowingCount = InstagramService.UserCountFormat(userInfo.Value.FollowingCount);
+        }
+
+        async void ShareImage()
+        {
+            await Share.RequestAsync(new ShareTextRequest
+            {
+                Title = $"Sharing {UserName}'s Profile Image...",
+                Uri = userInfo.Value.ProfilePicUrl.ToString()
+            });
         }
 
         async void OpenLink()

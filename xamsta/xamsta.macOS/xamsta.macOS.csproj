@@ -59,6 +59,9 @@
     <Reference Include="Acr.UserDialogs, Version=7.1.0.514, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Acr.UserDialogs.7.1.0.514\lib\xamarinmac20\Acr.UserDialogs.dll</HintPath>
     </Reference>
+    <Reference Include="APES.UI.XF, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ContextMenuContainer.1.0.2\lib\xamarinmac20\APES.UI.XF.dll</HintPath>
+    </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Portable.BouncyCastle.1.8.6.7\lib\netstandard2.0\BouncyCastle.Crypto.dll</HintPath>
     </Reference>
@@ -74,7 +77,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Xamarin.CommunityToolkit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Xamarin.CommunityToolkit.1.1.0\lib\xamarinmac20\Xamarin.CommunityToolkit.dll</HintPath>
+      <HintPath>..\..\packages\Xamarin.CommunityToolkit.1.2.0-pre2\lib\xamarinmac20\Xamarin.CommunityToolkit.dll</HintPath>
     </Reference>
     <Reference Include="Xamarin.Forms.Core, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Xamarin.Forms.5.0.0.2012\lib\Xamarin.Mac\Xamarin.Forms.Core.dll</HintPath>
@@ -157,14 +160,14 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="..\..\packages\Resizetizer.NT.0.2.0\build\Resizetizer.NT.targets" Condition="Exists('..\..\packages\Resizetizer.NT.0.2.0\build\Resizetizer.NT.targets')" />
-  <Import Project="..\..\packages\Xamarin.CommunityToolkit.1.1.0\build\Xamarin.CommunityToolkit.targets" Condition="Exists('..\..\packages\Xamarin.CommunityToolkit.1.1.0\build\Xamarin.CommunityToolkit.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\Xamarin.CommunityToolkit.1.1.0\build\Xamarin.CommunityToolkit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.CommunityToolkit.1.1.0\build\Xamarin.CommunityToolkit.targets'))" />
     <Error Condition="!Exists('..\..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.props'))" />
     <Error Condition="!Exists('..\..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Xamarin.CommunityToolkit.1.2.0-pre2\build\Xamarin.CommunityToolkit.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Xamarin.CommunityToolkit.1.2.0-pre2\build\Xamarin.CommunityToolkit.targets'))" />
   </Target>
   <Import Project="..\..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.5.0.0.2012\build\Xamarin.Forms.targets')" />
+  <Import Project="..\..\packages\Xamarin.CommunityToolkit.1.2.0-pre2\build\Xamarin.CommunityToolkit.targets" Condition="Exists('..\..\packages\Xamarin.CommunityToolkit.1.2.0-pre2\build\Xamarin.CommunityToolkit.targets')" />
 </Project>
