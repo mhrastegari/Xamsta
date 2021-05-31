@@ -158,6 +158,9 @@
     <BundleResource Include="Resources\next.png" />
     <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Unfollow.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Mac\Xamarin.Mac.CSharp.targets" />
   <Import Project="..\..\packages\Resizetizer.NT.0.2.0\build\Resizetizer.NT.targets" Condition="Exists('..\..\packages\Resizetizer.NT.0.2.0\build\Resizetizer.NT.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

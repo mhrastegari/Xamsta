@@ -29,7 +29,12 @@ namespace xamsta.macOS.Renderers
 			base.OnElementChanged(e);
 
 			if (Control != null)
+			{
 				Control.Activated += HandleActivated;
+
+				if (e.NewElement.IsChecked)
+					Control.State = NSCellStateValue.On;
+			}
 		}
 	}
 }
