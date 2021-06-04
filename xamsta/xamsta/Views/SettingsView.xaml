@@ -86,7 +86,7 @@
                                     FontAttributes="Bold"
                                     FontSize="18"
                                     Text="Xamsta " />
-                                <Span FontSize="14" Text=" v1.1.8" />
+                                <Span FontSize="14" Text=" v1.2.0" />
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

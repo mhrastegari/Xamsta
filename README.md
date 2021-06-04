@@ -10,6 +10,17 @@ This app has been developed via [Xamarin.Forms][8].
   <img width="800px" src='Images/macOS.png'>
 </div>
 
+# Support platforms
+- [x] Android
+- [x] iOS
+- [x] UWP (Min Target: 10.0.17763)
+- [x] macOS
+
+# Contact me in
+* LinkedIn: [MH Rastegari][10]
+* Twitter: [@mhrastegari77][11]
+* Telegram: [@mhrastegari77][12]
+
 # Special thanks to
 1. [Instagram Api Sharp][1]
 2. [Sharpnado Material Frame][2]
@@ -18,6 +29,7 @@ This app has been developed via [Xamarin.Forms][8].
 5. [Forms Nuke][5]
 6. [Glidex Froms][6]
 7. [Resizetizer NT][7]
+8. [ContextMenuContainer][9]
 
  [1]: https://github.com/ramtinak/InstagramApiSharp/
  [2]: https://github.com/roubachof/Sharpnado.MaterialFrame
@@ -27,3 +39,7 @@ This app has been developed via [Xamarin.Forms][8].
  [6]: https://github.com/jonathanpeppers/glidex/
  [7]: https://github.com/redth/Resizetizer
  [8]: https://github.com/xamarin/Xamarin.Forms/
+ [9]: https://github.com/anpin/ContextMenuContainer
+ [10]: https://www.linkedin.com/in/mhrastegari77/
+ [11]: https://twitter.com/mhrastegari77
+ [12]: https://telegram.me/mhrastegari77
