@@ -139,6 +139,7 @@
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Renderers\macOSMaterialFrameRenderer.cs" />
     <Compile Include="Renderers\macOSRadioButtonRenderer.cs" />
+    <Compile Include="Renderers\macOSSwitchRenderer.cs" />
     <Compile Include="ViewController.cs" />
     <Compile Include="ViewController.designer.cs">
       <DependentUpon>ViewController.cs</DependentUpon>
