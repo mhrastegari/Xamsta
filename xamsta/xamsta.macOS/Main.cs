@@ -7,6 +7,7 @@ namespace xamsta.macOS
         static void Main(string[] args)
         {
             NSApplication.Init();
+            NSApplication.SharedApplication.Delegate = new AppDelegate();
             NSApplication.Main(args);
         }
     }

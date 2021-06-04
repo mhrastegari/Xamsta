@@ -59,8 +59,8 @@
     <Reference Include="Acr.UserDialogs, Version=7.1.0.514, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Acr.UserDialogs.7.1.0.514\lib\xamarinmac20\Acr.UserDialogs.dll</HintPath>
     </Reference>
-    <Reference Include="APES.UI.XF, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\ContextMenuContainer.1.0.2\lib\xamarinmac20\APES.UI.XF.dll</HintPath>
+    <Reference Include="APES.UI.XF, Version=1.0.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ContextMenuContainer.1.0.3\lib\xamarinmac20\APES.UI.XF.dll</HintPath>
     </Reference>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Portable.BouncyCastle.1.8.6.7\lib\netstandard2.0\BouncyCastle.Crypto.dll</HintPath>

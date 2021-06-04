@@ -27339,8 +27339,8 @@ namespace xamsta.Droid
 			// aapt resource value: 0x7F070007
 			public const int Unfollow = 2131165191;
 			
-			// aapt resource value: 0x7F070172
-			public const int verified = 2131165554;
+			// aapt resource value: 0x7F070173
+			public const int verified = 2131165555;
 			
 			static Drawable()
 			{

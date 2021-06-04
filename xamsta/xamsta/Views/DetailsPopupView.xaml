@@ -38,23 +38,29 @@
                 <StackLayout Orientation="Horizontal" Spacing="10">
                     <cm:ContextMenuContainer x:Name="container1">
                         <cm:ContextMenuContainer.MenuItems>
-                            <cm:ContextMenuItem Text="Open Image" />
                             <cm:ContextMenuItem Command="{Binding ShareImageCommand}" Text="Share Image" />
                         </cm:ContextMenuContainer.MenuItems>
                         <cm:ContextMenuContainer.Content>
-                            <Image
+                            <Frame
+                                CornerRadius="40"
                                 HeightRequest="80"
                                 HorizontalOptions="Start"
-                                Source="{Binding ProfilePicUrl}"
                                 VerticalOptions="Start"
                                 WidthRequest="80">
-                                <Image.Clip>
-                                    <EllipseGeometry
-                                        Center="40,40"
-                                        RadiusX="40"
-                                        RadiusY="40" />
-                                </Image.Clip>
-                            </Image>
+                                <Image
+                                    HeightRequest="80"
+                                    HorizontalOptions="CenterAndExpand"
+                                    Source="{Binding ProfilePicUrl}"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="80">
+                                    <Image.Clip>
+                                        <EllipseGeometry
+                                            Center="40,40"
+                                            RadiusX="40"
+                                            RadiusY="40" />
+                                    </Image.Clip>
+                                </Image>
+                            </Frame>
                         </cm:ContextMenuContainer.Content>
                     </cm:ContextMenuContainer>
                     <Image
