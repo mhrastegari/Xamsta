@@ -28,23 +28,6 @@
             <Color x:Key="ToggleSwitchStrokeOff">Gray</Color>
             <Color x:Key="ToggleSwitchKnobFillOff">Gray</Color>
 
-            <Style TargetType="uwp:LayoutRenderer">
-                <Setter Property="Transitions">
-                    <Setter.Value>
-                        <TransitionCollection>
-                            <RepositionThemeTransition />
-                        </TransitionCollection>
-                    </Setter.Value>
-                </Setter>
-                <Setter Property="ChildrenTransitions">
-                    <Setter.Value>
-                        <TransitionCollection>
-                            <EntranceThemeTransition />
-                        </TransitionCollection>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            
             <Style TargetType="uwp:PageRenderer">
                 <Setter Property="Transitions">
                     <Setter.Value>
