@@ -6,23 +6,6 @@
     xmlns:uwp="using:Xamarin.Forms.Platform.UWP">
     <Application.Resources>
         <ResourceDictionary>
-            <ResourceDictionary.ThemeDictionaries>
-                <ResourceDictionary x:Key="Default">
-                    <AcrylicBrush
-                        x:Key="MyAcrylicBrush"
-                        BackgroundSource="HostBackdrop"
-                        TintOpacity="0.4" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="HighContrast">
-                    <SolidColorBrush x:Key="MyAcrylicBrush" Color="{ThemeResource SystemColorWindowColor}" />
-                </ResourceDictionary>
-                <ResourceDictionary x:Key="Light">
-                    <AcrylicBrush
-                        x:Key="MyAcrylicBrush"
-                        BackgroundSource="HostBackdrop"
-                        TintOpacity="0.4" />
-                </ResourceDictionary>
-            </ResourceDictionary.ThemeDictionaries>
 
             <Color x:Key="RadioButtonOuterEllipseStroke">Gray</Color>
             <Color x:Key="ToggleSwitchStrokeOff">Gray</Color>

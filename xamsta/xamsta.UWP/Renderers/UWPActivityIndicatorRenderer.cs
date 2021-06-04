@@ -1,17 +1,15 @@
-﻿using Windows.UI.Xaml.Controls;
-using Xamarin.Forms;
-using Xamarin.Forms.Platform.UWP;
-using xamsta.UWP.Renderers;
+﻿using Xamarin.Forms;
 using Windows.UI.Xaml;
+using xamsta.UWP.Renderers;
 using System.ComponentModel;
+using Windows.UI.Xaml.Controls;
+using Xamarin.Forms.Platform.UWP;
 
 [assembly: ExportRenderer(typeof(ActivityIndicator), typeof(UWPActivityIndicatorRenderer))]
 namespace xamsta.UWP.Renderers
 {
 	public class UWPActivityIndicatorRenderer : ViewRenderer<ActivityIndicator, ProgressRing>
 	{
-		object _foregroundDefault;
-
 		protected override void OnElementChanged(ElementChangedEventArgs<ActivityIndicator> e)
 		{
 			base.OnElementChanged(e);
@@ -25,11 +23,11 @@ namespace xamsta.UWP.Renderers
 						IsActive = true,
 						Visibility = Visibility.Visible,
 						IsEnabled = true,
-						Width = 25
 					});
 
 					Control.Loaded += OnControlLoaded;
 				}
+
 				UpdateIsRunning();
 			}
 		}
@@ -46,7 +44,6 @@ namespace xamsta.UWP.Renderers
 
 		void OnControlLoaded(object sender, RoutedEventArgs routedEventArgs)
 		{
-			_foregroundDefault = Control.Foreground;
 			UpdateColor();
 		}
 
@@ -54,7 +51,6 @@ namespace xamsta.UWP.Renderers
 		{
 			Color color = Element.Color;
 			Control.Foreground = color.ToBrush();
-
 		}
 
 		void UpdateIsRunning()
