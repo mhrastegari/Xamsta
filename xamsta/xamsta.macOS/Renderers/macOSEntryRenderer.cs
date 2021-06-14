@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
-using Xamarin.Forms.Platform.MacOS;
 using xamsta.macOS.Renderers;
+using Xamarin.Forms.Platform.MacOS;
 
 [assembly: ExportRenderer(typeof(Entry), typeof(macOSEntryRenderer))]
 namespace xamsta.macOS.Renderers

@@ -1,13 +1,13 @@
-﻿using InstagramApiSharp.Classes.Models;
-using Rg.Plugins.Popup.Extensions;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xamarin.Essentials;
+﻿using System.Linq;
+using xamsta.Views;
 using Xamarin.Forms;
 using xamsta.Helpers;
-using xamsta.Views;
+using Xamarin.Essentials;
+using System.Windows.Input;
+using System.Threading.Tasks;
+using System.Collections.Generic;
+using Rg.Plugins.Popup.Extensions;
+using InstagramApiSharp.Classes.Models;
 
 namespace xamsta.ViewModels
 {

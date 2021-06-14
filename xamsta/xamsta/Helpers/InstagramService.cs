@@ -1,16 +1,16 @@
-﻿using InstagramApiSharp;
-using InstagramApiSharp.API;
-using InstagramApiSharp.API.Builder;
-using InstagramApiSharp.Classes;
-using InstagramApiSharp.Classes.Models;
-using InstagramApiSharp.Logger;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Threading.Tasks;
-using Xamarin.Essentials;
-using Xamarin.Forms;
 using xamsta.Views;
+using Xamarin.Forms;
+using InstagramApiSharp;
+using Xamarin.Essentials;
+using InstagramApiSharp.API;
+using System.Threading.Tasks;
+using InstagramApiSharp.Logger;
+using InstagramApiSharp.Classes;
+using System.Collections.Generic;
+using InstagramApiSharp.API.Builder;
+using InstagramApiSharp.Classes.Models;
 
 namespace xamsta.Helpers
 {
@@ -213,7 +213,6 @@ namespace xamsta.Helpers
             }
             catch { }
         }
-
 
         public static async Task<LoginData?> LoadSession()
         {

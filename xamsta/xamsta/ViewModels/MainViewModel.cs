@@ -1,8 +1,8 @@
-﻿using System.Windows.Input;
+﻿using xamsta.Views;
 using Xamarin.Forms;
-using xamsta.Views;
-using System.Threading.Tasks;
 using xamsta.Helpers;
+using System.Windows.Input;
+using System.Threading.Tasks;
 
 namespace xamsta.ViewModels
 {

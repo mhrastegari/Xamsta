@@ -1,8 +1,8 @@
-﻿using Sharpnado.MaterialFrame;
-using System.Windows.Input;
-using Xamarin.Essentials;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using xamsta.Helpers;
+using Xamarin.Essentials;
+using System.Windows.Input;
+using Sharpnado.MaterialFrame;
 
 namespace xamsta.ViewModels
 {

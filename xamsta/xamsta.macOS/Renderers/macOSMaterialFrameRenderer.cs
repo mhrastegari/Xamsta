@@ -1,14 +1,14 @@
 ﻿using System;
-using System.ComponentModel;
-using CoreAnimation;
-using CoreGraphics;
-using Foundation;
-using Sharpnado.MaterialFrame;
 using AppKit;
+using Foundation;
+using CoreGraphics;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.MacOS;
-using Color = Xamarin.Forms.Color;
+using CoreAnimation;
+using System.ComponentModel;
 using xamsta.macOS.Renderers;
+using Sharpnado.MaterialFrame;
+using Color = Xamarin.Forms.Color;
+using Xamarin.Forms.Platform.MacOS;
 
 [assembly: ExportRenderer(typeof(MaterialFrame), typeof(macOSMaterialFrameRenderer))]
 

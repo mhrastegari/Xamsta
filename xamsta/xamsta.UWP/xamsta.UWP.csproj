@@ -107,6 +107,7 @@
     <Compile Include="Renderers\UWPActivityIndicatorRenderer.cs" />
     <Compile Include="Renderers\UWPEntryRenderer.cs" />
     <Compile Include="Renderers\UWPLayoutRenderer.cs" />
+    <Compile Include="Renderers\UWPMaterialFrameRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -183,7 +184,7 @@
       <Version>7.1.0.514</Version>
     </PackageReference>
     <PackageReference Include="ContextMenuContainer">
-      <Version>1.0.3</Version>
+      <Version>1.0.6</Version>
     </PackageReference>
     <PackageReference Include="InstagramApiSharp">
       <Version>1.6.0</Version>

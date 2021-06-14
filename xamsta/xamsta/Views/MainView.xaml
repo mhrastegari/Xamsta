@@ -10,8 +10,13 @@
     <ContentPage.BindingContext>
         <vm:MainViewModel />
     </ContentPage.BindingContext>
-    <Grid>
+    <sh:MaterialFrame
+        Style="{StaticResource DefaultFrame}"
+        StyleClass="blur">
         <StackLayout Margin="0,80">
+            <StackLayout.Background>
+                <SolidColorBrush Color="#77000000" />
+            </StackLayout.Background>
             <Label
                 Margin="20,0"
                 FontSize="Large"
@@ -102,5 +107,5 @@
                 </sh:MaterialFrame>
             </Grid>
         </StackLayout>
-    </Grid>
+    </sh:MaterialFrame>
 </ContentPage>
