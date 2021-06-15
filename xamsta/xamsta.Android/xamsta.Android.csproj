@@ -70,7 +70,7 @@
       <Version>7.1.0.514</Version>
     </PackageReference>
     <PackageReference Include="ContextMenuContainer">
-      <Version>1.0.6</Version>
+      <Version>1.0.7</Version>
     </PackageReference>
     <PackageReference Include="glidex.forms">
       <Version>2.1.0.470</Version>

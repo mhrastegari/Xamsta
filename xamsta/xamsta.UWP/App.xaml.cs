@@ -1,24 +1,23 @@
-﻿using Sharpnado.MaterialFrame.UWP;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Collections.Generic;
 using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Core;
 using Windows.Foundation;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation.Collections;
+using Windows.ApplicationModel.Activation;
 using Windows.UI;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Navigation;
+using Windows.UI.Xaml.Controls.Primitives;
 
 namespace xamsta.UWP
 {
@@ -75,7 +74,12 @@ namespace xamsta.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                var rendererAssemblies = new[] { typeof(UWPMaterialFrameRenderer).GetTypeInfo().Assembly, typeof(Rg.Plugins.Popup.Popup).GetTypeInfo().Assembly };
+                var rendererAssemblies = new[] 
+                {
+                    typeof(Rg.Plugins.Popup.Popup).GetTypeInfo().Assembly ,
+                    typeof(APES.UI.XF.ContextMenuContainer).GetTypeInfo().Assembly
+                };
+
                 Xamarin.Forms.Forms.Init(e, rendererAssemblies);
 
                 Rg.Plugins.Popup.Popup.Init();

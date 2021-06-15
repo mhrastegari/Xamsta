@@ -14,7 +14,7 @@
 	
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs" Version="7.1.0.514" />
-    <PackageReference Include="ContextMenuContainer" Version="1.0.6" />
+    <PackageReference Include="ContextMenuContainer" Version="1.0.7" />
     <PackageReference Include="InstagramApiSharp" Version="1.6.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Resizetizer.NT" Version="0.2.0" />
