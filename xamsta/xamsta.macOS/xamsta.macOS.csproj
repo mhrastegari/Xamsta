@@ -71,8 +71,8 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.13.0.1\lib\netstandard2.0\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="Rg.Plugins.Popup, Version=2.0.0.11, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Rg.Plugins.Popup.2.0.0.11\lib\xamarinmac20\Rg.Plugins.Popup.dll</HintPath>
+    <Reference Include="Rg.Plugins.Popup, Version=2.0.0.12, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Rg.Plugins.Popup.2.0.0.12\lib\xamarinmac20\Rg.Plugins.Popup.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -157,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\next.png" />
-    <BundleResource Include="Resources\settings.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Unfollow.png" />

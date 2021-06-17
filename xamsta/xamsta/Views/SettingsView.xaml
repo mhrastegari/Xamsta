@@ -14,7 +14,7 @@
     <sh:MaterialFrame Style="{StaticResource DefaultFrame}" StyleClass="blur">
         <Grid>
             <Grid.Background>
-                <SolidColorBrush Color="#77000000" />
+                <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
             </Grid.Background>
             <ScrollView
                 Margin="15,0"

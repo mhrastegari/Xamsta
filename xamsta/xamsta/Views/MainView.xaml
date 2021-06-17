@@ -10,12 +10,10 @@
     <ContentPage.BindingContext>
         <vm:MainViewModel />
     </ContentPage.BindingContext>
-    <sh:MaterialFrame
-        Style="{StaticResource DefaultFrame}"
-        StyleClass="blur">
+    <sh:MaterialFrame Style="{StaticResource DefaultFrame}" StyleClass="blur">
         <StackLayout Margin="0,80">
             <StackLayout.Background>
-                <SolidColorBrush Color="#77000000" />
+                <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
             </StackLayout.Background>
             <Label
                 Margin="20,0"

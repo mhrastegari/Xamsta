@@ -11,6 +11,11 @@
             <Color x:Key="ToggleSwitchStrokeOff">Gray</Color>
             <Color x:Key="ToggleSwitchKnobFillOff">Gray</Color>
 
+            <Style TargetType="ToggleSwitch">
+                <Setter Property="OffContent" Value=" " />
+                <Setter Property="OnContent" Value=" " />
+            </Style>
+
             <Style TargetType="uwp:PageRenderer">
                 <Setter Property="Transitions">
                     <Setter.Value>

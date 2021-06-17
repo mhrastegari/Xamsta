@@ -18,7 +18,7 @@
     <PackageReference Include="InstagramApiSharp" Version="1.6.0" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="Resizetizer.NT" Version="0.2.0" />
-    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.11" />
+    <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.12" />
     <PackageReference Include="Sharpnado.MaterialFrame" Version="1.1.4" />
     <PackageReference Include="Xamarin.CommunityToolkit" Version="1.2.0-pre2" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
@@ -30,13 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <SharedImage Include="Assets\Images\expander.png" />
-    <SharedImage Include="Assets\Images\logout.png" />
     <SharedImage Include="Assets\Images\next.png" BaseSize="20" />
-    <SharedImage Include="Assets\Images\ProfileDefault.jpg" />
-    <SharedImage Include="Assets\Images\settings.png" />
+    <SharedImage Include="Assets\Images\ProfileDefault.jpg" BaseSize="80" />
     <SharedImage Include="Assets\Images\Unfollow.png" BaseSize="20" />
-    <SharedImage Include="Assets\Images\verified.png" />
+    <SharedImage Include="Assets\Images\verified.png" BaseSize="20" />
   </ItemGroup>
 
 </Project>
