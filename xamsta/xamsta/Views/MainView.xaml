@@ -11,7 +11,7 @@
         <vm:MainViewModel />
     </ContentPage.BindingContext>
     <sh:MaterialFrame Style="{StaticResource DefaultFrame}" StyleClass="blur">
-        <StackLayout Margin="0,80">
+        <StackLayout Padding="0,80">
             <StackLayout.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
             </StackLayout.Background>
@@ -24,7 +24,7 @@
                 Margin="20,0,40,0"
                 Text="To find your unfollowers, Please login to your instagram account."
                 VerticalOptions="Start" />
-            <Grid VerticalOptions="CenterAndExpand">
+            <Grid BackgroundColor="Transparent" VerticalOptions="CenterAndExpand">
                 <sh:MaterialFrame
                     Margin="-70,0,70,0"
                     Padding="85,10,25,10"
