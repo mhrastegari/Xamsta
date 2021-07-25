@@ -20,10 +20,7 @@
             <ScrollView Padding="0,0,0,15" VerticalScrollBarVisibility="Never">
                 <StackLayout>
                     <Label
-                        Margin="{OnPlatform iOS='15,150,15,0',
-                                            macOS='15,135,15,0',
-                                            Android='15,160,15,0',
-                                            Default='15,135,15,5'}"
+                        x:Name="count"
                         FontAttributes="Bold"
                         FontSize="16"
                         HorizontalOptions="StartAndExpand"
@@ -198,9 +195,7 @@
                 </StackLayout>
             </ScrollView>
             <sh:MaterialFrame
-                Padding="{OnPlatform iOS='20,45,20,30',
-                                     Android='20,43,20,20',
-                                     Default='20'}"
+                x:Name="header"
                 AcrylicGlowColor="Gray"
                 Style="{StaticResource DefaultFrame}"
                 StyleClass="blur"
@@ -210,21 +205,13 @@
                     Spacing="20"
                     VerticalOptions="CenterAndExpand">
                     <Image
+                        x:Name="profile"
                         BackgroundColor="Gray"
-                        HeightRequest="80"
                         HorizontalOptions="Start"
                         MinimumHeightRequest="80"
                         MinimumWidthRequest="80"
                         Source="{Binding ProfilePicUrl}"
-                        VerticalOptions="CenterAndExpand"
-                        WidthRequest="80">
-                        <Image.Clip>
-                            <EllipseGeometry
-                                Center="40,40"
-                                RadiusX="40"
-                                RadiusY="40" />
-                        </Image.Clip>
-                    </Image>
+                        VerticalOptions="CenterAndExpand" />
                     <StackLayout Spacing="0">
                         <Label
                             FontAttributes="Bold"
@@ -233,12 +220,13 @@
                             Text="{Binding UserName}"
                             VerticalOptions="EndAndExpand" />
                         <Label
+                            x:Name="fullname"
                             FontSize="16"
                             HorizontalOptions="Start"
+                            MinimumWidthRequest="{OnIdiom Phone=175,
+                                                          Default=220}"
                             Text="{Binding FullName}"
-                            VerticalOptions="End"
-                            WidthRequest="{OnIdiom Phone=175,
-                                                   Default=220}" />
+                            VerticalOptions="End" />
                     </StackLayout>
                     <sh:MaterialFrame
                         Padding="0"
@@ -286,4 +274,53 @@
             </sh:MaterialFrame>
         </Grid>
     </sh:MaterialFrame>
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup>
+                <VisualState x:Name="Portrait">
+                    <VisualState.StateTriggers>
+                        <OrientationStateTrigger Orientation="Portrait" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter TargetName="count" Property="Label.Margin" Value="{OnPlatform iOS='15,150,15,0', macOS='15,135,15,0', Android='15,160,15,0', Default='15,135,15,5'}" />
+                        <Setter TargetName="header" Property="sh:MaterialFrame.Padding" Value="{OnPlatform iOS='20,45,20,30', Android='20,43,20,20', Default='20'}" />
+                        <Setter TargetName="fullname" Property="Label.WidthRequest" Value="{OnIdiom Phone=175, Default=220}" />
+                        <Setter TargetName="profile" Property="Image.HeightRequest" Value="80" />
+                        <Setter TargetName="profile" Property="Image.WidthRequest" Value="80" />
+                        <Setter TargetName="profile" Property="Image.Clip">
+                            <Setter.Value>
+                                <EllipseGeometry
+                                    Center="40,40"
+                                    RadiusX="40"
+                                    RadiusY="40" />
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Landscape">
+                    <VisualState.StateTriggers>
+                        <OrientationStateTrigger Orientation="Landscape" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter TargetName="count" Property="Label.Margin" Value="{OnPlatform iOS='15,100,15,0', macOS='15,135,15,0', Android='15,110,15,0', Default='15,135,15,5'}" />
+                        <Setter TargetName="header" Property="sh:MaterialFrame.Padding" Value="{OnPlatform iOS='10,22,10,15', Android='10,33,10,10', Default='20'}" />
+                        <Setter TargetName="fullname" Property="Label.WidthRequest" Value="{OnIdiom Phone=240, Desktop=220}" />
+                        <Setter TargetName="profile" Property="Image.HeightRequest" Value="{OnIdiom Phone=50, Default=80}" />
+                        <Setter TargetName="profile" Property="Image.WidthRequest" Value="{OnIdiom Phone=50, Default=80}" />
+                        <Setter TargetName="profile" Property="Image.Clip">
+                            <Setter.Value>
+                                <EllipseGeometry
+                                    Center="{OnIdiom Phone='25,25',
+                                                     Default='40,40'}"
+                                    RadiusX="{OnIdiom Phone=25,
+                                                      Default=40}"
+                                    RadiusY="{OnIdiom Phone=25,
+                                                      Default=40}" />
+                            </Setter.Value>
+                        </Setter>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
 </ContentPage>
