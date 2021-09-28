@@ -28,12 +28,9 @@ namespace xamsta
 
         private async void Load()
         {
-            var result = await InstagramService.LoadSession();
+            InstagramService.LoginData? result = await InstagramService.LoadSession();
 
-            if (result != null)
-                MainPage = new NavigationPage(new HomeView());
-            else
-                MainPage = new NavigationPage(new MainView());
+            MainPage = result != null ? new NavigationPage(new HomeView()) : new NavigationPage(new MainView());
         }
     }
 }

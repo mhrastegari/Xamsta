@@ -17,7 +17,6 @@ namespace xamsta.Droid
 
             base.OnCreate(savedInstanceState);
             UserDialogs.Init(this);
-            StatusBar.Activity = this;
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             Android.Glide.Forms.Init(this);

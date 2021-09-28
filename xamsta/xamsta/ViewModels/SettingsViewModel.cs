@@ -2,7 +2,6 @@
 using xamsta.Helpers;
 using Xamarin.Essentials;
 using System.Windows.Input;
-using Sharpnado.MaterialFrame;
 
 namespace xamsta.ViewModels
 {

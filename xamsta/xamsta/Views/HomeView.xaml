@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="http://apes.ge"
-    xmlns:sh="http://sharpnado.com"
+    xmlns:sh="clr-namespace:xamsta.Helpers"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="Transparent"
@@ -12,7 +12,11 @@
     <ContentPage.BindingContext>
         <vm:HomeViewModel />
     </ContentPage.BindingContext>
-    <sh:MaterialFrame Style="{StaticResource DefaultFrame}" StyleClass="blur">
+    <sh:MaterialFrame
+        Style="{StaticResource DefaultFrame}"
+        StyleClass="blur"
+        UwpHostBackdropBlur="True"
+        macOSBehindWindowBlur="True">
         <Grid>
             <Grid.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
@@ -199,7 +203,9 @@
                 AcrylicGlowColor="Gray"
                 Style="{StaticResource DefaultFrame}"
                 StyleClass="blur"
-                VerticalOptions="Start">
+                UwpHostBackdropBlur="True"
+                VerticalOptions="Start"
+                macOSBehindWindowBlur="True">
                 <StackLayout
                     Orientation="Horizontal"
                     Spacing="20"

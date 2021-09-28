@@ -1,14 +1,21 @@
-﻿using System;
-using AppKit;
-using Foundation;
-using CoreGraphics;
-using Xamarin.Forms;
-using CoreAnimation;
+﻿using AppKit;
+
+using System;
 using System.ComponentModel;
+
+using CoreAnimation;
+
+using CoreGraphics;
+
+using Foundation;
+
+using xamsta.Helpers;
 using xamsta.macOS.Renderers;
-using Sharpnado.MaterialFrame;
-using Color = Xamarin.Forms.Color;
+
+using Xamarin.Forms;
 using Xamarin.Forms.Platform.MacOS;
+
+using Color = Xamarin.Forms.Color;
 
 [assembly: ExportRenderer(typeof(MaterialFrame), typeof(macOSMaterialFrameRenderer))]
 
@@ -147,7 +154,9 @@ namespace xamsta.macOS.Renderers
         private void UpdateAcrylicGlowColor()
         {
             if (Element.MaterialTheme != MaterialFrame.Theme.Acrylic)
+            {
                 return;
+            }
 
             Layer.BackgroundColor = Element.AcrylicGlowColor.ToCGColor();
         }
@@ -274,7 +283,7 @@ namespace xamsta.macOS.Renderers
         {
             if (_blurView != null)
             {
-                _blurView.BlendingMode = NSVisualEffectBlendingMode.WithinWindow;
+                _blurView.BlendingMode = Element.macOSBehindWindowBlur ? NSVisualEffectBlendingMode.BehindWindow : NSVisualEffectBlendingMode.WithinWindow;
                 _blurView.Material = ConvertBlurStyle();
             }
         }
@@ -338,6 +347,7 @@ namespace xamsta.macOS.Renderers
     internal class macOSVisualEffectView : NSVisualEffectView
     {
         public override bool AllowsVibrancy => true;
+
         public override bool WantsDefaultClipping => false;
     }
 }

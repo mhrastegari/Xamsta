@@ -4,14 +4,18 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-    xmlns:sh="http://sharpnado.com"
+    xmlns:sh="clr-namespace:xamsta.Helpers"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     ios:Page.ModalPresentationStyle="FormSheet"
     x:DataType="vm:SettingsViewModel">
     <ContentPage.BindingContext>
         <vm:SettingsViewModel />
     </ContentPage.BindingContext>
-    <sh:MaterialFrame Style="{StaticResource DefaultFrame}" StyleClass="blur">
+    <sh:MaterialFrame
+        Style="{StaticResource DefaultFrame}"
+        StyleClass="blur"
+        UwpHostBackdropBlur="True"
+        macOSBehindWindowBlur="True">
         <Grid>
             <Grid.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
@@ -90,11 +94,11 @@
                                         FontAttributes="Bold"
                                         FontSize="18"
                                         Text="Xamsta " />
-                                    <Span FontSize="14" Text=" v1.2.1" />
+                                    <Span FontSize="14" Text=" v1.3.0" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>
-                        <Label Margin="0,0,10,0" Text="Xamsta is an unofficial instagram client for Android, iOS, macOS and Windows 10 Devices which can help you to find your unfollowers. &#x0a;This app has been developed via Xamarin.Forms." />
+                        <Label Margin="0,0,10,0" Text="Xamsta is an unofficial instagram client for Android, iOS, macOS and Windows Devices which can help you to find your unfollowers. &#x0a;This app has been developed via Xamarin.Forms." />
                     </StackLayout>
                 </StackLayout>
             </ScrollView>
@@ -105,7 +109,9 @@
                 HeightRequest="{OnPlatform Default=35,
                                            UWP=38}"
                 Style="{StaticResource DefaultFrame}"
-                VerticalOptions="Start">
+                UwpHostBackdropBlur="True"
+                VerticalOptions="Start"
+                macOSBehindWindowBlur="True">
                 <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand">
                     <Label
                         FontSize="{OnPlatform Default=18,

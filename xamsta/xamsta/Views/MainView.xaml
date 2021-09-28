@@ -3,14 +3,18 @@
     x:Class="xamsta.Views.MainView"
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:sh="http://sharpnado.com"
+    xmlns:sh="clr-namespace:xamsta.Helpers"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <vm:MainViewModel />
     </ContentPage.BindingContext>
-    <sh:MaterialFrame Style="{StaticResource DefaultFrame}" StyleClass="blur">
+    <sh:MaterialFrame
+        Style="{StaticResource DefaultFrame}"
+        StyleClass="blur"
+        UwpHostBackdropBlur="True"
+        macOSBehindWindowBlur="True">
         <StackLayout Padding="0,80">
             <StackLayout.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />

@@ -6,7 +6,7 @@
     xmlns:cm="http://apes.ge"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:rg="http://rotorgames.com"
-    xmlns:sh="clr-namespace:Sharpnado.MaterialFrame;assembly=Sharpnado.MaterialFrame"
+    xmlns:sh="clr-namespace:xamsta.Helpers"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     ios:Page.UseSafeArea="True">
@@ -30,9 +30,11 @@
         HorizontalOptions="{OnIdiom Phone=FillAndExpand,
                                     Desktop=CenterAndExpand}"
         Style="{StaticResource DefaultFrame}"
+        UwpHostBackdropBlur="False"
         VerticalOptions="EndAndExpand"
         WidthRequest="{OnIdiom Phone=305,
-                               Default=800}">
+                               Default=800}"
+        macOSBehindWindowBlur="False">
         <StackLayout Padding="0,15,0,0" Spacing="10">
             <StackLayout Margin="15,0" Spacing="15">
                 <StackLayout Orientation="Horizontal" Spacing="10">

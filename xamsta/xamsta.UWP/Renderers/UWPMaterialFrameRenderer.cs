@@ -9,7 +9,7 @@ using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Automation.Peers;
 
-using Sharpnado.MaterialFrame;
+using xamsta.Helpers;
 using Sharpnado.MaterialFrame.UWP;
 
 using Xamarin.Forms.Internals;
@@ -22,13 +22,17 @@ using AcrylicBackgroundSource = Microsoft.UI.Xaml.Media.AcrylicBackgroundSource;
 [assembly: ExportRenderer(typeof(MaterialFrame), typeof(xamsta.UWP.Renderers.UWPMaterialFrameRenderer))]
 namespace xamsta.UWP.Renderers
 {
+    [Preserve]
     public class UWPMaterialFrameRenderer : ViewRenderer<MaterialFrame, Grid>
     {
         private static readonly Color DarkBlurOverlayColor = Color.FromHex("#80000000");
+        private static readonly Color DarkFallBackColor = Color.FromHex("#333333");
 
         private static readonly Color LightBlurOverlayColor = Color.FromHex("#40FFFFFF");
+        private static readonly Color LightFallBackColor = Color.FromHex("#F3F3F3");
 
         private static readonly Color ExtraLightBlurOverlayColor = Color.FromHex("#B0FFFFFF");
+        private static readonly Color ExtraLightFallBackColor = Color.FromHex("#FBFBFB");
 
         private Rectangle _acrylicRectangle;
         private Rectangle _shadowHost;
@@ -44,6 +48,7 @@ namespace xamsta.UWP.Renderers
 
         protected override AutomationPeer OnCreateAutomationPeer()
         {
+            // We need an automation peer so we can interact with this in automated tests
             if (Control == null)
             {
                 return new FrameworkElementAutomationPeer(this);
@@ -182,7 +187,7 @@ namespace xamsta.UWP.Renderers
 
             if (cornerRadius == -1f)
             {
-                cornerRadius = 5f;
+                cornerRadius = 5f; // default corner radius
             }
 
             _grid.CornerRadius = new CornerRadius(cornerRadius);
@@ -258,6 +263,7 @@ namespace xamsta.UWP.Renderers
                 return;
             }
 
+            // https://docs.microsoft.com/en-US/windows/uwp/composition/using-the-visual-layer-with-xaml
             bool isAcrylicTheme = Element.MaterialTheme == MaterialFrame.Theme.Acrylic;
 
             float blurRadius = isAcrylicTheme ? MaterialFrame.AcrylicElevation : Element.Elevation;
@@ -356,19 +362,21 @@ namespace xamsta.UWP.Renderers
                 return;
             }
 
-            var acrylicBrush = new AcrylicBrush { BackgroundSource = AcrylicBackgroundSource.HostBackdrop };
+            var acrylicBrush = new AcrylicBrush { BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop };
 
             switch (Element.MaterialBlurStyle)
             {
                 case MaterialFrame.BlurStyle.ExtraLight:
                     acrylicBrush.TintColor = ExtraLightBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = ExtraLightFallBackColor.ToWindowsColor();
                     break;
                 case MaterialFrame.BlurStyle.Dark:
                     acrylicBrush.TintColor = DarkBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = DarkFallBackColor.ToWindowsColor();
                     break;
-
                 default:
                     acrylicBrush.TintColor = LightBlurOverlayColor.ToWindowsColor();
+                    acrylicBrush.FallbackColor = LightFallBackColor.ToWindowsColor();
                     break;
             }
 
@@ -386,7 +394,7 @@ namespace xamsta.UWP.Renderers
             {
                 var acrylicBrush = new AcrylicBrush
                 {
-                    BackgroundSource = AcrylicBackgroundSource.HostBackdrop,
+                    BackgroundSource = Element.UwpHostBackdropBlur ? AcrylicBackgroundSource.HostBackdrop : AcrylicBackgroundSource.Backdrop,
                     TintColor = Element.UwpBlurOverlayColor.ToWindowsColor(),
                 };
 
@@ -395,6 +403,11 @@ namespace xamsta.UWP.Renderers
             }
 
             UpdateMaterialBlurStyle();
+        }
+
+        private static void WarnNotImplemented(string propertyName)
+        {
+            //InternalLogger.Warn($"The {propertyName} property is not yet available on UWP platform");
         }
     }
 
@@ -411,4 +424,3 @@ namespace xamsta.UWP.Renderers
         }
     }
 }
-
