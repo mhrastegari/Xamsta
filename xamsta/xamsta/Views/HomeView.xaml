@@ -21,7 +21,7 @@
             <Grid.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
             </Grid.Background>
-            <ScrollView Padding="0,0,0,15" VerticalScrollBarVisibility="Never">
+            <ScrollView Padding="{OnPlatform macOS='0,20', Default='0,0,0,15'}" VerticalScrollBarVisibility="Never">
                 <StackLayout>
                     <Label
                         x:Name="count"
@@ -200,6 +200,8 @@
             </ScrollView>
             <sh:MaterialFrame
                 x:Name="header"
+                Padding="{OnPlatform UWP=20,
+                                     Default='20,40,20,20'}"
                 AcrylicGlowColor="Gray"
                 Style="{StaticResource DefaultFrame}"
                 StyleClass="blur"

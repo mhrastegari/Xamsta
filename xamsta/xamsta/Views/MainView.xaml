@@ -6,6 +6,7 @@
     xmlns:sh="clr-namespace:xamsta.Helpers"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    BackgroundColor="Transparent"
     NavigationPage.HasNavigationBar="False">
     <ContentPage.BindingContext>
         <vm:MainViewModel />

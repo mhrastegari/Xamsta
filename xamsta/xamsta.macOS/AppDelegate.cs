@@ -1,4 +1,5 @@
 ﻿using AppKit;
+using CoreGraphics;
 using Foundation;
 using Xamarin.Forms.Platform.MacOS;
 
@@ -10,10 +11,12 @@ namespace xamsta.macOS
         NSWindow window;
         public AppDelegate()
         {
-            var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled;
-            var rect = new CoreGraphics.CGRect(200, 1000, 1024, 768);
+            var style = NSWindowStyle.Closable | NSWindowStyle.Resizable | NSWindowStyle.Titled | NSWindowStyle.FullSizeContentView | NSWindowStyle.Miniaturizable;
+            var rect = new CGRect(200, 1000, 1024, 768);
             window = new NSWindow(rect, style, NSBackingStore.Buffered, false);
+            window.MinSize = new CGSize(535, 745);
             window.Title = "Xamsta";
+            window.TitlebarAppearsTransparent = true;
             window.TitleVisibility = NSWindowTitleVisibility.Hidden;
         }
 

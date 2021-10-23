@@ -8,7 +8,7 @@
 
   <Identity
     Name="84338641-6d38-4ac9-9178-e555625ece01"
-    Publisher="CN=mhrastegari"
+    Publisher="CN=MHRastegari"
     Version="1.2.1.0" />
 
   <mp:PhoneIdentity PhoneProductId="ec0cc741-fd3e-485c-81be-68815c480690" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
