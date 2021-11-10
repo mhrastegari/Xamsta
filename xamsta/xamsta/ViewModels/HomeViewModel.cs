@@ -69,7 +69,7 @@ namespace xamsta.ViewModels
             }
         }
 
-        private string _profilePicUrl = "ProfileDefault.png";
+        private string _profilePicUrl = "profiledefault.png";
         public string? ProfilePicUrl
         {
             get => _profilePicUrl;

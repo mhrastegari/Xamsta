@@ -21,7 +21,7 @@
             <Grid.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
             </Grid.Background>
-            <ScrollView Padding="{OnPlatform macOS='0,20', Default='0,0,0,15'}" VerticalScrollBarVisibility="Never">
+            <ScrollView VerticalScrollBarVisibility="Never">
                 <StackLayout>
                     <Label
                         x:Name="count"
@@ -30,21 +30,20 @@
                         HorizontalOptions="StartAndExpand"
                         Text="{Binding unfollowersCount, StringFormat='Unfollowers: {0}'}"
                         VerticalOptions="End" />
-                    <FlexLayout
+                    <xct:UniformGrid
                         x:Name="UnfollowersCV"
-                        AlignContent="Start"
-                        AlignItems="Start"
-                        BindableLayout.ItemsSource="{Binding unFollowersList}"
-                        JustifyContent="Center"
-                        Wrap="Wrap">
+                        Margin="10,0"
+                        Padding="{OnPlatform macOS='0,20',
+                                             Default='0,0,0,15'}"
+                        BindableLayout.ItemsSource="{Binding unFollowersList}">
                         <BindableLayout.EmptyViewTemplate>
                             <DataTemplate>
                                 <ActivityIndicator
-                                    Margin="0,120,0,0"
                                     HeightRequest="80"
                                     HorizontalOptions="{OnPlatform UWP=FillAndExpand,
                                                                    Default=CenterAndExpand}"
                                     IsRunning="True"
+                                    TranslationY="120"
                                     VerticalOptions="CenterAndExpand"
                                     WidthRequest="{OnPlatform Default=80,
                                                               UWP=480}"
@@ -55,11 +54,10 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <StackLayout
-                                    Margin="10"
+                                    Padding="5,5"
                                     HeightRequest="100"
                                     HorizontalOptions="CenterAndExpand"
-                                    WidthRequest="{OnIdiom Default=350,
-                                                           Desktop=450}">
+                                    WidthRequest="335">
                                     <cm:ContextMenuContainer x:Name="container1" HorizontalOptions="StartAndExpand">
                                         <cm:ContextMenuContainer.MenuItems>
                                             <cm:ContextMenuItem
@@ -71,7 +69,7 @@
                                             <cm:ContextMenuItem
                                                 Command="{Binding Source={x:Reference UnfollowersCV}, Path=BindingContext.UnfollowCommand}"
                                                 CommandParameter="{Binding .}"
-                                                Icon="Unfollow.png"
+                                                Icon="unfollow.png"
                                                 IsDestructive="True"
                                                 Text="Unfollow" />
                                         </cm:ContextMenuContainer.MenuItems>
@@ -121,7 +119,7 @@
                                                                     HorizontalOptions="Start"
                                                                     Text="{Binding FullName}"
                                                                     VerticalOptions="CenterAndExpand"
-                                                                    WidthRequest="110" />
+                                                                    WidthRequest="125" />
                                                                 <Label
                                                                     FontSize="12"
                                                                     HorizontalOptions="StartAndExpand"
@@ -195,7 +193,7 @@
                                 </StackLayout>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
-                    </FlexLayout>
+                    </xct:UniformGrid>
                 </StackLayout>
             </ScrollView>
             <sh:MaterialFrame
@@ -229,9 +227,9 @@
                             VerticalOptions="EndAndExpand" />
                         <Label
                             x:Name="fullname"
-                            FontSize="16"
+                            FontSize="14"
                             HorizontalOptions="Start"
-                            MinimumWidthRequest="{OnIdiom Phone=175,
+                            MinimumWidthRequest="{OnIdiom Phone=100,
                                                           Default=220}"
                             Text="{Binding FullName}"
                             VerticalOptions="End" />
@@ -248,6 +246,8 @@
                         IsClippedToBounds="True"
                         MaterialTheme="{AppThemeBinding Dark=Dark,
                                                         Light=Acrylic}"
+                        MinimumWidthRequest="{OnIdiom Default=120,
+                                                      Phone=40}"
                         VerticalOptions="EndAndExpand"
                         WidthRequest="{OnIdiom Default=120,
                                                Phone=40}">

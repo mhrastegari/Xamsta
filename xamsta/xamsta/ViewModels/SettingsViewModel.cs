@@ -45,7 +45,7 @@ namespace xamsta.ViewModels
 
         public bool IsAcrylic
         {
-            get => Preferences.Get(nameof(IsAcrylic), false);
+            get => Preferences.Get(nameof(IsAcrylic), Device.RuntimePlatform == Device.Android ? false : true);
             set
             {
                 Preferences.Set(nameof(IsAcrylic), value);
