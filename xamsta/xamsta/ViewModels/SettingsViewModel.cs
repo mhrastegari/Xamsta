@@ -54,6 +54,8 @@ namespace xamsta.ViewModels
             }
         }
 
+        public string AppVersion { get; set; }
+
         public ICommand LogoutCommand { get; set; }
         public ICommand ViewAccountCommand { get; set; }
         public ICommand DoneCommand { get; set; }
@@ -63,6 +65,9 @@ namespace xamsta.ViewModels
             LogoutCommand = new Command(Logout);
             ViewAccountCommand = new Command(ViewAccount);
             DoneCommand = new Command(Done);
+
+            AppVersion = "v " + VersionTracking.CurrentVersion;
+
             SetAppTheme();
         }
 

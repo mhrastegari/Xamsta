@@ -5,6 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="http://apes.ge"
     xmlns:sh="clr-namespace:xamsta.Helpers"
+    xmlns:trans="clr-namespace:OliveTree.Transitions;assembly=OliveTree.Transitions"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="Transparent"
@@ -17,6 +18,11 @@
         StyleClass="blur"
         UwpHostBackdropBlur="True"
         macOSBehindWindowBlur="True">
+        <trans:Interaction.Transitions>
+            <trans:TransitionCollection>
+                <trans:EdgeTransition Duration="400" />
+            </trans:TransitionCollection>
+        </trans:Interaction.Transitions>
         <Grid>
             <Grid.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
@@ -34,21 +40,29 @@
                         x:Name="UnfollowersCV"
                         Margin="10,0"
                         Padding="{OnPlatform macOS='0,20',
+                                             iOS='0,-20,0,15',
                                              Default='0,0,0,15'}"
                         BindableLayout.ItemsSource="{Binding unFollowersList}">
                         <BindableLayout.EmptyViewTemplate>
                             <DataTemplate>
-                                <ActivityIndicator
-                                    HeightRequest="80"
+                                <Grid
+                                    Padding="0,120,0,0"
+                                    BackgroundColor="Transparent"
+                                    HeightRequest="100"
                                     HorizontalOptions="{OnPlatform UWP=FillAndExpand,
                                                                    Default=CenterAndExpand}"
-                                    IsRunning="True"
-                                    TranslationY="120"
-                                    VerticalOptions="CenterAndExpand"
-                                    WidthRequest="{OnPlatform Default=80,
-                                                              UWP=480}"
-                                    Color="{AppThemeBinding Dark=White,
-                                                            Light=Black}" />
+                                    VerticalOptions="CenterAndExpand">
+                                    <ActivityIndicator
+                                        HeightRequest="80"
+                                        HorizontalOptions="{OnPlatform UWP=FillAndExpand,
+                                                                       Default=CenterAndExpand}"
+                                        IsRunning="True"
+                                        VerticalOptions="CenterAndExpand"
+                                        WidthRequest="{OnPlatform Default=80,
+                                                                  UWP=480}"
+                                        Color="{AppThemeBinding Dark=White,
+                                                                Light=Black}" />
+                                </Grid>
                             </DataTemplate>
                         </BindableLayout.EmptyViewTemplate>
                         <BindableLayout.ItemTemplate>
@@ -75,7 +89,7 @@
                                         </cm:ContextMenuContainer.MenuItems>
                                         <cm:ContextMenuContainer.Content>
                                             <Grid BackgroundColor="Transparent">
-                                                <sh:MaterialFrame CornerRadius="10" MaterialTheme="{AppThemeBinding Dark=Dark, Light=Acrylic}">
+                                                <sh:MaterialFrame CornerRadius="8" MaterialTheme="{AppThemeBinding Dark=Dark, Light=Acrylic}">
                                                     <Grid BackgroundColor="Transparent">
 
                                                         <StackLayout
@@ -85,31 +99,33 @@
                                                             HeightRequest="65"
                                                             Orientation="Horizontal"
                                                             Spacing="15">
-                                                            <Image
+                                                            <Frame
                                                                 Margin="{OnPlatform Default=0,
                                                                                     macOS='20,0,0,0'}"
+                                                                Padding="0"
                                                                 BackgroundColor="Transparent"
+                                                                CornerRadius="30"
                                                                 HeightRequest="60"
                                                                 HorizontalOptions="Start"
-                                                                MinimumHeightRequest="60"
-                                                                MinimumWidthRequest="60"
-                                                                Source="{Binding ProfilePicUrl}"
+                                                                IsClippedToBounds="True"
                                                                 VerticalOptions="CenterAndExpand"
                                                                 WidthRequest="60">
-                                                                <Image.Clip>
-                                                                    <EllipseGeometry
-                                                                        Center="30,30"
-                                                                        RadiusX="30"
-                                                                        RadiusY="30" />
-                                                                </Image.Clip>
-                                                            </Image>
+                                                                <Image
+                                                                    BackgroundColor="Transparent"
+                                                                    HeightRequest="60"
+                                                                    HorizontalOptions="Start"
+                                                                    MinimumHeightRequest="60"
+                                                                    MinimumWidthRequest="60"
+                                                                    Source="{Binding ProfilePicUrl}"
+                                                                    VerticalOptions="CenterAndExpand"
+                                                                    WidthRequest="60" />
+                                                            </Frame>
                                                             <Image
                                                                 Margin="-30,0,0,0"
                                                                 HeightRequest="15"
                                                                 HorizontalOptions="Start"
                                                                 IsVisible="{Binding IsVerified}"
                                                                 Source="verified.png"
-                                                                TranslationY="-3"
                                                                 VerticalOptions="End"
                                                                 WidthRequest="15" />
                                                             <StackLayout VerticalOptions="CenterAndExpand">
@@ -161,8 +177,9 @@
                                                                                                       Light=#F2F2F2}"
                                                                     Command="{Binding Source={x:Reference UnfollowersCV}, Path=BindingContext.UnfollowCommand}"
                                                                     CommandParameter="{Binding .}"
-                                                                    CornerRadius="5"
+                                                                    CornerRadius="4"
                                                                     HeightRequest="35"
+                                                                    FontSize="12"
                                                                     Text="Unfollow"
                                                                     TextTransform="None"
                                                                     VerticalOptions="CenterAndExpand"
@@ -199,7 +216,7 @@
             <sh:MaterialFrame
                 x:Name="header"
                 Padding="{OnPlatform UWP=20,
-                                     Default='20,40,20,20'}"
+                                     Default='20,50,20,20'}"
                 AcrylicGlowColor="Gray"
                 Style="{StaticResource DefaultFrame}"
                 StyleClass="blur"
@@ -210,14 +227,23 @@
                     Orientation="Horizontal"
                     Spacing="20"
                     VerticalOptions="CenterAndExpand">
-                    <Image
-                        x:Name="profile"
-                        BackgroundColor="Gray"
+                    <Frame
+                        x:Name="profileframe"
+                        BackgroundColor="Transparent"
+                        CornerRadius="40"
+                        HeightRequest="80"
                         HorizontalOptions="Start"
-                        MinimumHeightRequest="80"
-                        MinimumWidthRequest="80"
-                        Source="{Binding ProfilePicUrl}"
-                        VerticalOptions="CenterAndExpand" />
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="80">
+                        <Image
+                            x:Name="profile"
+                            BackgroundColor="Gray"
+                            HorizontalOptions="Center"
+                            MinimumHeightRequest="80"
+                            MinimumWidthRequest="80"
+                            Source="{Binding ProfilePicUrl}"
+                            VerticalOptions="CenterAndExpand" />
+                    </Frame>
                     <StackLayout Spacing="0">
                         <Label
                             FontAttributes="Bold"
@@ -239,7 +265,7 @@
                         xct:TouchEffect.NativeAnimation="True"
                         xct:TouchEffect.NativeAnimationRadius="5"
                         CornerRadius="{OnIdiom Phone=20,
-                                               Default=5}"
+                                               Default=4}"
                         HasShadow="True"
                         HeightRequest="40"
                         HorizontalOptions="EndAndExpand"
@@ -315,17 +341,9 @@
                         <Setter TargetName="fullname" Property="Label.WidthRequest" Value="{OnIdiom Phone=240, Desktop=220}" />
                         <Setter TargetName="profile" Property="Image.HeightRequest" Value="{OnIdiom Phone=50, Default=80}" />
                         <Setter TargetName="profile" Property="Image.WidthRequest" Value="{OnIdiom Phone=50, Default=80}" />
-                        <Setter TargetName="profile" Property="Image.Clip">
-                            <Setter.Value>
-                                <EllipseGeometry
-                                    Center="{OnIdiom Phone='25,25',
-                                                     Default='40,40'}"
-                                    RadiusX="{OnIdiom Phone=25,
-                                                      Default=40}"
-                                    RadiusY="{OnIdiom Phone=25,
-                                                      Default=40}" />
-                            </Setter.Value>
-                        </Setter>
+                        <Setter TargetName="profileframe" Property="Frame.HeightRequest" Value="{OnIdiom Phone=50, Default=80}" />
+                        <Setter TargetName="profileframe" Property="Frame.WidthRequest" Value="{OnIdiom Phone=50, Default=80}" />
+                        <Setter TargetName="profileframe" Property="Frame.CornerRadius" Value="{OnIdiom Phone=25, Default=40}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

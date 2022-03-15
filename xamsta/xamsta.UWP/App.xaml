@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:xamsta.UWP"
+    xmlns:rg="using:Rg.Plugins.Popup.Windows.Renderers"
     xmlns:uwp="using:Xamarin.Forms.Platform.UWP">
     <Application.Resources>
         <ResourceDictionary>
@@ -17,22 +18,25 @@
             </Style>
 
             <Style TargetType="uwp:PageRenderer">
-                <Setter Property="Transitions">
-                    <Setter.Value>
-                        <TransitionCollection>
-                            <RepositionThemeTransition />
-                        </TransitionCollection>
-                    </Setter.Value>
-                </Setter>
                 <Setter Property="ChildrenTransitions">
                     <Setter.Value>
                         <TransitionCollection>
-                            <EntranceThemeTransition />
+                            <EntranceThemeTransition IsStaggeringEnabled="True" />
                         </TransitionCollection>
                     </Setter.Value>
                 </Setter>
             </Style>
 
+            <Style TargetType="rg:PopupPageRenderer">
+                <Setter Property="ChildrenTransitions">
+                    <Setter.Value>
+                        <TransitionCollection>
+                            <EdgeUIThemeTransition Edge="Bottom" />
+                        </TransitionCollection>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            
         </ResourceDictionary>
     </Application.Resources>
 </Application>
