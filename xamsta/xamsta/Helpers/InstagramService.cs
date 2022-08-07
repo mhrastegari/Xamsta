@@ -14,7 +14,7 @@ using InstagramApiSharp.Classes.Models;
 
 namespace xamsta.Helpers
 {
-    public static class InstagramService 
+    public static class InstagramService
     {
         public static string json;
         public static InstaUserInfo info;
@@ -36,9 +36,9 @@ namespace xamsta.Helpers
 
         public static async Task<IResult<InstaUserInfo>> GetUserInfoByUsernameAsync(string UserName)
         {
-            var userInfo = await InstaApi.UserProcessor.GetUserInfoByUsernameAsync(UserName); 
+            var userInfo = await InstaApi.UserProcessor.GetUserInfoByUsernameAsync(UserName);
 
-            if(userInfo.Value==null)
+            if (userInfo.Value == null)
                 return null;
             else
                 return userInfo;
@@ -155,13 +155,13 @@ namespace xamsta.Helpers
 
                         case InstaLoginResult.TwoFactorRequired:
                             var result = await Acr.UserDialogs.UserDialogs.Instance.PromptAsync("Enter the 6-digits code that instagram has been sent to your number \n", "Enter Security Code", "Auth", "Cancel");
-                            if(result.Ok)
-                            { 
+                            if (result.Ok)
+                            {
                                 if (InstaApi == null)
                                     return false;
                                 if (string.IsNullOrEmpty(result.Text))
                                 {
-                                    await Application.Current.MainPage.DisplayAlert("Error", "Please type your two factor code and then press Auth button.","Ok");
+                                    await Application.Current.MainPage.DisplayAlert("Error", "Please type your two factor code and then press Auth button.", "Ok");
                                     return false;
                                 }
                                 var twoFactorLogin = await InstaApi.TwoFactorLoginAsync(result.Text);
@@ -189,14 +189,17 @@ namespace xamsta.Helpers
             }
         }
 
-        public static async Task<IEnumerable<InstaUserShort>> GetUnfollowers()
+        public static async Task<IEnumerable<InstaUserShort>> GetUnfollowers(string username = null)
         {
-            var currentUser = InstaApi.GetLoggedUser();
-            followersList = await InstaApi.UserProcessor.GetUserFollowersAsync(currentUser.LoggedInUser.UserName, PaginationParameters.MaxPagesToLoad(6));
-            followingsList = await InstaApi.UserProcessor.GetUserFollowingAsync(currentUser.LoggedInUser.UserName, PaginationParameters.MaxPagesToLoad(6));
-            HashSet<string> followerUsernameList = new HashSet<string>(followersList.Value.Select(s => s.UserName));
+            UserSessionData currentUser=null;
+            if (username == null)
+                 currentUser = InstaApi.GetLoggedUser();
+            followersList = await InstaApi.UserProcessor.GetUserFollowersAsync(username == null ? currentUser.LoggedInUser.UserName : username, PaginationParameters.MaxPagesToLoad(20));
+            followingsList = await InstaApi.UserProcessor.GetUserFollowingAsync(username == null ? currentUser.LoggedInUser.UserName : username, PaginationParameters.MaxPagesToLoad(20));
+            List<string> followerUsernameList = followersList.Value.Select(s => s.UserName).Distinct().ToList();
             unfollowerList = followingsList.Value.Where(m => !followerUsernameList.Contains(m.UserName));
             return unfollowerList;
+
         }
 
         public static async Task SaveSession()
@@ -238,7 +241,7 @@ namespace xamsta.Helpers
                 loginData.UserName = InstaApi.GetLoggedUser().UserName;
                 loginData.Password = InstaApi.GetLoggedUser().Password;
 
-               
+
                 return loginData;
             }
             catch { InstaApi = null; return null; }

@@ -31,6 +31,7 @@ namespace xamsta
             InstagramService.LoginData? result = await InstagramService.LoadSession();
 
             MainPage = result != null ? new NavigationPage(new HomeView()) : new NavigationPage(new MainView());
+            //MainPage =  new NavigationPage(new HomeView());
         }
     }
 }

@@ -12,16 +12,11 @@ namespace xamsta.UWP.Renderers
         protected override void OnElementChanged(ElementChangedEventArgs<Layout> e)
         {
             base.OnElementChanged(e);
-
             if (e.OldElement != null || Element != null)
             {
                 TransitionCollection trs = new TransitionCollection();
-                RepositionThemeTransition reposition = new RepositionThemeTransition();
-                EntranceThemeTransition entrance = new EntranceThemeTransition();
-
-                entrance.IsStaggeringEnabled = true;
-                trs.Add(reposition);
-                trs.Add(entrance);
+                RepositionThemeTransition enttrs = new RepositionThemeTransition();
+                trs.Add(enttrs);
                 this.ChildrenTransitions = trs;
             }
         }

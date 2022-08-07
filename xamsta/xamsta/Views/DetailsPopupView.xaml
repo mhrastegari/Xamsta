@@ -7,10 +7,8 @@
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:rg="http://rotorgames.com"
     xmlns:sh="clr-namespace:xamsta.Helpers"
-    xmlns:trans="clr-namespace:OliveTree.Transitions;assembly=OliveTree.Transitions"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-    x:Name="This"
     ios:Page.UseSafeArea="True">
     <rg:PopupPage.BindingContext>
         <vm:DetailsPopupViewModel />
@@ -26,8 +24,7 @@
     </rg:PopupPage.Animation>
     <sh:MaterialFrame
         Margin="0,0,0,-50"
-        AndroidBlurRootElement="{Binding Source={x:Reference This}}"
-        CornerRadius="8"
+        CornerRadius="15"
         HeightRequest="{OnIdiom Phone=400,
                                 Default=555}"
         HorizontalOptions="{OnIdiom Phone=FillAndExpand,
@@ -38,11 +35,6 @@
         WidthRequest="{OnIdiom Phone=305,
                                Default=800}"
         macOSBehindWindowBlur="False">
-        <trans:Interaction.Transitions>
-            <trans:TransitionCollection>
-                <trans:EdgeTransition Duration="400" />
-            </trans:TransitionCollection>
-        </trans:Interaction.Transitions>
         <StackLayout Padding="0,15,0,0" Spacing="10">
             <StackLayout Margin="15,0" Spacing="15">
                 <StackLayout Orientation="Horizontal" Spacing="10">
@@ -74,11 +66,12 @@
                         </cm:ContextMenuContainer.Content>
                     </cm:ContextMenuContainer>
                     <Image
-                        Margin="-30,0,0,0"
                         HeightRequest="20"
                         HorizontalOptions="Start"
                         IsVisible="{Binding IsVerified}"
                         Source="verified.png"
+                        TranslationX="-30"
+                        TranslationY="-3"
                         VerticalOptions="EndAndExpand"
                         WidthRequest="20" />
                     <StackLayout Orientation="Horizontal">

@@ -13,20 +13,20 @@
   </PropertyGroup>
 	
   <ItemGroup>
-    <PackageReference Include="Acr.UserDialogs" Version="7.2.0.562" />
-    <PackageReference Include="ContextMenuContainer" Version="1.0.8" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.2.0.534" />
+    <PackageReference Include="ContextMenuContainer" Version="1.0.7" />
     <PackageReference Include="InstagramApiSharp" Version="1.7.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
-    <PackageReference Include="OliveTree.Transitions" Version="1.1.0" />
+    <PackageReference Include="MvvmLightLibs" Version="5.4.1.1" />
     <PackageReference Include="Resizetizer.NT" Version="0.3.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup" Version="2.0.0.12" />
-    <PackageReference Include="Sharpnado.MaterialFrame" Version="1.3.0" />
-    <PackageReference Include="Xamarin.CommunityToolkit" Version="2.0.0" />
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Sharpnado.MaterialFrame" Version="1.2.0" />
+    <PackageReference Include="Xamarin.CommunityToolkit" Version="1.3.0" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -38,6 +38,12 @@
     <SharedImage Include="Assets\Images\profiledefault.jpg" BaseSize="80" />
     <SharedImage Include="Assets\Images\unfollow.png" BaseSize="20" />
     <SharedImage Include="Assets\Images\verified.png" BaseSize="20" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\PreLoginView.xaml.cs">
+      <DependentUpon>PreLoginView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 
 </Project>

@@ -4,7 +4,6 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:sh="clr-namespace:xamsta.Helpers"
-    xmlns:trans="clr-namespace:OliveTree.Transitions;assembly=OliveTree.Transitions"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="Transparent"
@@ -17,11 +16,6 @@
         StyleClass="blur"
         UwpHostBackdropBlur="True"
         macOSBehindWindowBlur="True">
-        <trans:Interaction.Transitions>
-            <trans:TransitionCollection>
-                <trans:EdgeTransition Duration="400" />
-            </trans:TransitionCollection>
-        </trans:Interaction.Transitions>
         <StackLayout Padding="0,80">
             <StackLayout.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />

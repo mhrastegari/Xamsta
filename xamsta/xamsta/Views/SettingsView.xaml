@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
     xmlns:sh="clr-namespace:xamsta.Helpers"
-    xmlns:trans="clr-namespace:OliveTree.Transitions;assembly=OliveTree.Transitions"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     ios:Page.ModalPresentationStyle="FormSheet"
     x:DataType="vm:SettingsViewModel">
@@ -17,11 +16,6 @@
         StyleClass="blur"
         UwpHostBackdropBlur="True"
         macOSBehindWindowBlur="True">
-        <trans:Interaction.Transitions>
-            <trans:TransitionCollection>
-                <trans:EdgeTransition Duration="400" />
-            </trans:TransitionCollection>
-        </trans:Interaction.Transitions>
         <Grid>
             <Grid.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
@@ -74,7 +68,8 @@
                             TextColor="Accent" />
                         <Button
                             Margin="{OnPlatform Android='-10,-15,0,0',
-                                                Default='0,0,0,0'}"
+                                                macOS='0,0,0,0',
+                                                Default='0,-10,0,0'}"
                             BackgroundColor="Transparent"
                             Command="{Binding LogoutCommand}"
                             CornerRadius="3"
@@ -99,7 +94,7 @@
                                         FontAttributes="Bold"
                                         FontSize="18"
                                         Text="Xamsta " />
-                                    <Span FontSize="14" Text="{Binding AppVersion}" />
+                                    <Span FontSize="14" Text=" v1.3.0" />
                                 </FormattedString>
                             </Label.FormattedText>
                         </Label>

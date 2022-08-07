@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Collections.Generic;
 using Rg.Plugins.Popup.Extensions;
 using InstagramApiSharp.Classes.Models;
+using GalaSoft.MvvmLight.Command;
+using Newtonsoft.Json;
 
 namespace xamsta.ViewModels
 {
@@ -68,7 +70,45 @@ namespace xamsta.ViewModels
                 }
             }
         }
-
+        private bool _resultEdiorVisibility;
+        public bool ResultEdiorVisibility
+        {
+            get => _resultEdiorVisibility;
+            set
+            {
+                if (_resultEdiorVisibility != value)
+                {
+                    _resultEdiorVisibility = value;
+                    OnPropertyChanged(nameof(ResultEdiorVisibility));
+                }
+            }
+        }
+        private string? _inputUserName;
+        public string? InputUserName
+        {
+            get => _inputUserName;
+            set
+            {
+                if (_inputUserName != value)
+                {
+                    _inputUserName = value;
+                    OnPropertyChanged(nameof(InputUserName));
+                }
+            }
+        }
+        private string? _unfollowersStringArray;
+        public string? UnfollowersStringArray
+        {
+            get => _unfollowersStringArray;
+            set
+            {
+                if (_unfollowersStringArray != value)
+                {
+                    _unfollowersStringArray = value;
+                    OnPropertyChanged(nameof(UnfollowersStringArray));
+                }
+            }
+        }
         private string _profilePicUrl = "profiledefault.png";
         public string? ProfilePicUrl
         {
@@ -86,17 +126,32 @@ namespace xamsta.ViewModels
         public ICommand UnfollowCommand { get; set; }
         public ICommand SelectedUserCommand { get; set; }
         public ICommand SettingsViewCommand { get; set; }
+        public ICommand FindUnfollowersViewCommand { get; set; }
 
         public HomeViewModel()
         {
             SettingsViewCommand = new Command(SettingsView);
             UnfollowCommand = new Command<InstaUserShort>(Unfollow);
             SelectedUserCommand = new Command<InstaUserShort>(SelectedUser);
+            FindUnfollowersViewCommand = new RelayCommand(FinUnfollowersHard);
             load();
+        }
+
+        private async void FinUnfollowersHard()
+        {
+            if (InputUserName != null)
+            {
+                var unfollowers = await InstagramService.GetUnfollowers(InputUserName);
+                var unFollowersList = unfollowers;
+                var unfollowersCount = unfollowers.Count().ToString();
+                UnfollowersStringArray = string.Join(" <br/> ", unfollowers.Select(r=>r.UserName).ToArray());
+                ResultEdiorVisibility = true;
+            }
         }
 
         async Task load()
         {
+            ResultEdiorVisibility = false;
             var connection = Connectivity.NetworkAccess;
             var unfollowers = await InstagramService.GetUnfollowers();
             var currentUser = InstagramService.InstaApi.GetLoggedUser();
@@ -114,7 +169,7 @@ namespace xamsta.ViewModels
             else if (userInfo.Value == null && connection == NetworkAccess.Internet)
             {
                 bool res = await Application.Current.MainPage.DisplayAlert("Something went wrong!", "try to reopen Xamsta or ....", "Logout", "Refresh App");
-                
+
                 switch (res)
                 {
                     case true:
@@ -160,7 +215,7 @@ namespace xamsta.ViewModels
         {
             try
             {
-                if(userinfo.IsPrivate==true)
+                if (userinfo.IsPrivate == true)
                 {
                     var res = await Application.Current.MainPage.DisplayActionSheet($"If you change your mind, you'll have to request to follow {userinfo.UserName} again.", "Cancel", "Unfollow");
                     switch (res)

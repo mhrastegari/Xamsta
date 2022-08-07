@@ -5,7 +5,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:cm="http://apes.ge"
     xmlns:sh="clr-namespace:xamsta.Helpers"
-    xmlns:trans="clr-namespace:OliveTree.Transitions;assembly=OliveTree.Transitions"
     xmlns:vm="clr-namespace:xamsta.ViewModels"
     xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
     BackgroundColor="Transparent"
@@ -18,11 +17,6 @@
         StyleClass="blur"
         UwpHostBackdropBlur="True"
         macOSBehindWindowBlur="True">
-        <trans:Interaction.Transitions>
-            <trans:TransitionCollection>
-                <trans:EdgeTransition Duration="400" />
-            </trans:TransitionCollection>
-        </trans:Interaction.Transitions>
         <Grid>
             <Grid.Background>
                 <SolidColorBrush Color="{AppThemeBinding Dark=#77000000, Light=#77ffffff}" />
@@ -40,29 +34,21 @@
                         x:Name="UnfollowersCV"
                         Margin="10,0"
                         Padding="{OnPlatform macOS='0,20',
-                                             iOS='0,-20,0,15',
                                              Default='0,0,0,15'}"
                         BindableLayout.ItemsSource="{Binding unFollowersList}">
                         <BindableLayout.EmptyViewTemplate>
                             <DataTemplate>
-                                <Grid
-                                    Padding="0,120,0,0"
-                                    BackgroundColor="Transparent"
-                                    HeightRequest="100"
+                                <ActivityIndicator
+                                    HeightRequest="80"
                                     HorizontalOptions="{OnPlatform UWP=FillAndExpand,
                                                                    Default=CenterAndExpand}"
-                                    VerticalOptions="CenterAndExpand">
-                                    <ActivityIndicator
-                                        HeightRequest="80"
-                                        HorizontalOptions="{OnPlatform UWP=FillAndExpand,
-                                                                       Default=CenterAndExpand}"
-                                        IsRunning="True"
-                                        VerticalOptions="CenterAndExpand"
-                                        WidthRequest="{OnPlatform Default=80,
-                                                                  UWP=480}"
-                                        Color="{AppThemeBinding Dark=White,
-                                                                Light=Black}" />
-                                </Grid>
+                                    IsRunning="True"
+                                    TranslationY="120"
+                                    VerticalOptions="CenterAndExpand"
+                                    WidthRequest="{OnPlatform Default=80,
+                                                              UWP=480}"
+                                    Color="{AppThemeBinding Dark=White,
+                                                            Light=Black}" />
                             </DataTemplate>
                         </BindableLayout.EmptyViewTemplate>
                         <BindableLayout.ItemTemplate>
@@ -89,7 +75,7 @@
                                         </cm:ContextMenuContainer.MenuItems>
                                         <cm:ContextMenuContainer.Content>
                                             <Grid BackgroundColor="Transparent">
-                                                <sh:MaterialFrame CornerRadius="8" MaterialTheme="{AppThemeBinding Dark=Dark, Light=Acrylic}">
+                                                <sh:MaterialFrame CornerRadius="10" MaterialTheme="{AppThemeBinding Dark=Dark, Light=Acrylic}">
                                                     <Grid BackgroundColor="Transparent">
 
                                                         <StackLayout
@@ -99,33 +85,31 @@
                                                             HeightRequest="65"
                                                             Orientation="Horizontal"
                                                             Spacing="15">
-                                                            <Frame
+                                                            <Image
                                                                 Margin="{OnPlatform Default=0,
                                                                                     macOS='20,0,0,0'}"
-                                                                Padding="0"
                                                                 BackgroundColor="Transparent"
-                                                                CornerRadius="30"
                                                                 HeightRequest="60"
                                                                 HorizontalOptions="Start"
-                                                                IsClippedToBounds="True"
+                                                                MinimumHeightRequest="60"
+                                                                MinimumWidthRequest="60"
+                                                                Source="{Binding ProfilePicUrl}"
                                                                 VerticalOptions="CenterAndExpand"
                                                                 WidthRequest="60">
-                                                                <Image
-                                                                    BackgroundColor="Transparent"
-                                                                    HeightRequest="60"
-                                                                    HorizontalOptions="Start"
-                                                                    MinimumHeightRequest="60"
-                                                                    MinimumWidthRequest="60"
-                                                                    Source="{Binding ProfilePicUrl}"
-                                                                    VerticalOptions="CenterAndExpand"
-                                                                    WidthRequest="60" />
-                                                            </Frame>
+                                                                <Image.Clip>
+                                                                    <EllipseGeometry
+                                                                        Center="30,30"
+                                                                        RadiusX="30"
+                                                                        RadiusY="30" />
+                                                                </Image.Clip>
+                                                            </Image>
                                                             <Image
                                                                 Margin="-30,0,0,0"
                                                                 HeightRequest="15"
                                                                 HorizontalOptions="Start"
                                                                 IsVisible="{Binding IsVerified}"
                                                                 Source="verified.png"
+                                                                TranslationY="-3"
                                                                 VerticalOptions="End"
                                                                 WidthRequest="15" />
                                                             <StackLayout VerticalOptions="CenterAndExpand">
@@ -177,9 +161,8 @@
                                                                                                       Light=#F2F2F2}"
                                                                     Command="{Binding Source={x:Reference UnfollowersCV}, Path=BindingContext.UnfollowCommand}"
                                                                     CommandParameter="{Binding .}"
-                                                                    CornerRadius="4"
+                                                                    CornerRadius="5"
                                                                     HeightRequest="35"
-                                                                    FontSize="12"
                                                                     Text="Unfollow"
                                                                     TextTransform="None"
                                                                     VerticalOptions="CenterAndExpand"
@@ -216,7 +199,7 @@
             <sh:MaterialFrame
                 x:Name="header"
                 Padding="{OnPlatform UWP=20,
-                                     Default='20,50,20,20'}"
+                                     Default='20,40,20,20'}"
                 AcrylicGlowColor="Gray"
                 Style="{StaticResource DefaultFrame}"
                 StyleClass="blur"
@@ -227,23 +210,14 @@
                     Orientation="Horizontal"
                     Spacing="20"
                     VerticalOptions="CenterAndExpand">
-                    <Frame
-                        x:Name="profileframe"
-                        BackgroundColor="Transparent"
-                        CornerRadius="40"
-                        HeightRequest="80"
+                    <Image
+                        x:Name="profile"
+                        BackgroundColor="Gray"
                         HorizontalOptions="Start"
-                        VerticalOptions="CenterAndExpand"
-                        WidthRequest="80">
-                        <Image
-                            x:Name="profile"
-                            BackgroundColor="Gray"
-                            HorizontalOptions="Center"
-                            MinimumHeightRequest="80"
-                            MinimumWidthRequest="80"
-                            Source="{Binding ProfilePicUrl}"
-                            VerticalOptions="CenterAndExpand" />
-                    </Frame>
+                        MinimumHeightRequest="80"
+                        MinimumWidthRequest="80"
+                        Source="{Binding ProfilePicUrl}"
+                        VerticalOptions="CenterAndExpand" />
                     <StackLayout Spacing="0">
                         <Label
                             FontAttributes="Bold"
@@ -260,12 +234,76 @@
                             Text="{Binding FullName}"
                             VerticalOptions="End" />
                     </StackLayout>
+
+                    <!--  Find  -->
                     <sh:MaterialFrame
                         Padding="0"
                         xct:TouchEffect.NativeAnimation="True"
                         xct:TouchEffect.NativeAnimationRadius="5"
                         CornerRadius="{OnIdiom Phone=20,
-                                               Default=4}"
+                                               Default=5}"
+                        HasShadow="True"
+                        HeightRequest="40"
+                        HorizontalOptions="Fill"
+                        IsClippedToBounds="True"
+                        MaterialTheme="{AppThemeBinding Dark=Dark,
+                                                        Light=Acrylic}"
+                        MinimumWidthRequest="{OnIdiom Default=120,
+                                                      Phone=40}"
+                        VerticalOptions="EndAndExpand"
+                        WidthRequest="{OnIdiom Default=200,
+                                               Phone=40}">
+                        <StackLayout
+                            BackgroundColor="{AppThemeBinding Dark=#77000000,
+                                                              Light=Transparent}"
+                            Orientation="Horizontal"
+                            VerticalOptions="CenterAndExpand">
+                            <Path
+                                Margin="7,10"
+                                Aspect="Uniform"
+                                Data="M 52.1 90 H 37.9 c -2.867 0 -5.2 -2.333 -5.2 -5.2 v -2.114 c 0 -0.329 -0.191 -0.634 -0.454 -0.725 c -1.482 -0.511 -2.955 -1.122 -4.375 -1.816 c -0.246 -0.118 -0.576 -0.046 -0.802 0.18 l -1.516 1.516 c -0.981 0.982 -2.288 1.523 -3.677 1.523 c -1.389 0 -2.695 -0.541 -3.677 -1.524 L 8.16 71.799 c -2.027 -2.027 -2.027 -5.326 0 -7.354 l 1.516 -1.516 c 0.223 -0.223 0.299 -0.56 0.181 -0.8 c -0.695 -1.423 -1.307 -2.895 -1.818 -4.377 C 7.947 57.49 7.643 57.3 7.314 57.3 H 5.2 c -2.867 0 -5.2 -2.333 -5.2 -5.2 V 37.9 c 0 -2.867 2.333 -5.2 5.2 -5.2 h 2.115 c 0.329 0 0.633 -0.19 0.724 -0.454 c 0.513 -1.483 1.124 -2.956 1.817 -4.374 c 0.12 -0.246 0.046 -0.576 -0.181 -0.802 L 8.16 25.555 c -2.027 -2.028 -2.027 -5.327 0 -7.354 L 18.201 8.159 c 0.982 -0.982 2.288 -1.522 3.677 -1.522 c 1.389 0 2.695 0.541 3.677 1.522 l 1.516 1.517 c 0.224 0.223 0.559 0.3 0.801 0.18 c 1.418 -0.693 2.891 -1.305 4.375 -1.818 C 32.51 7.947 32.7 7.643 32.7 7.314 V 5.2 c 0 -2.867 2.333 -5.2 5.2 -5.2 h 14.2 c 2.867 0 5.2 2.333 5.2 5.2 v 2.115 c 0 0.329 0.19 0.633 0.453 0.724 c 1.482 0.512 2.954 1.124 4.375 1.818 c 0.247 0.118 0.575 0.045 0.802 -0.181 l 1.516 -1.516 c 2.027 -2.027 5.326 -2.027 7.354 0 L 81.84 18.2 c 2.027 2.028 2.027 5.327 0 7.354 l -1.516 1.516 c -0.227 0.227 -0.301 0.556 -0.181 0.802 c 0.695 1.42 1.307 2.893 1.818 4.376 c 0.09 0.262 0.395 0.452 0.724 0.452 H 84.8 c 2.867 0 5.2 2.333 5.2 5.2 V 52.1 c 0 2.867 -2.333 5.2 -5.2 5.2 h -2.114 c -0.329 0 -0.634 0.19 -0.725 0.454 c -0.51 1.478 -1.121 2.95 -1.815 4.373 c -0.119 0.244 -0.044 0.58 0.179 0.803 l 1.516 1.516 c 2.027 2.027 2.027 5.326 0 7.354 L 71.799 81.84 c -0.982 0.982 -2.288 1.523 -3.677 1.523 c -1.39 0 -2.696 -0.542 -3.678 -1.525 l -1.514 -1.513 c -0.228 -0.226 -0.557 -0.302 -0.803 -0.182 c -1.42 0.695 -2.893 1.307 -4.376 1.818 c -0.262 0.09 -0.452 0.395 -0.452 0.724 V 84.8 C 57.3 87.667 54.967 90 52.1 90 z M 39.7 83 h 10.6 v -0.314 c 0 -3.322 2.076 -6.272 5.167 -7.34 c 1.216 -0.42 2.422 -0.921 3.588 -1.491 c 2.936 -1.434 6.481 -0.822 8.824 1.521 l 0.243 0.242 l 7.495 -7.495 l -0.242 -0.243 c -2.345 -2.344 -2.955 -5.891 -1.519 -8.825 c 0.569 -1.166 1.07 -2.373 1.488 -3.585 c 1.068 -3.093 4.019 -5.169 7.341 -5.169 H 83 V 39.7 h -0.314 c -3.322 0 -6.272 -2.076 -7.34 -5.167 c -0.42 -1.216 -0.921 -2.422 -1.491 -3.588 c -1.434 -2.936 -0.823 -6.482 1.521 -8.825 l 0.242 -0.243 l -7.495 -7.495 l -0.243 0.243 c -2.344 2.344 -5.89 2.953 -8.824 1.52 c -1.166 -0.57 -2.373 -1.071 -3.587 -1.491 c -3.091 -1.067 -5.168 -4.017 -5.168 -7.34 V 7 H 39.7 v 0.314 c 0 3.323 -2.077 6.272 -5.168 7.34 c -1.217 0.42 -2.424 0.922 -3.587 1.491 c -2.936 1.434 -6.481 0.823 -8.825 -1.52 l -0.243 -0.243 l -7.495 7.495 l 0.243 0.243 c 2.343 2.344 2.954 5.89 1.52 8.825 c -0.568 1.163 -1.07 2.37 -1.49 3.587 c -1.068 3.092 -4.018 5.168 -7.34 5.168 H 7 v 10.6 h 0.314 c 3.323 0 6.272 2.077 7.34 5.168 c 0.419 1.214 0.921 2.421 1.491 3.588 c 1.435 2.933 0.824 6.479 -1.52 8.823 l -0.243 0.243 l 7.496 7.495 l 0.242 -0.242 c 2.344 -2.346 5.891 -2.954 8.826 -1.52 c 1.164 0.568 2.37 1.07 3.585 1.489 c 3.092 1.068 5.168 4.019 5.168 7.341 V 83 z M 45.028 70.402 c -6.738 0 -13.204 -2.652 -17.991 -7.439 c -5.265 -5.265 -7.947 -12.561 -7.359 -20.016 c 0.97 -12.296 10.974 -22.3 23.27 -23.27 c 7.457 -0.588 14.751 2.095 20.016 7.359 c 5.265 5.266 7.947 12.561 7.36 20.017 c -0.971 12.297 -10.975 22.3 -23.271 23.27 l 0 0 C 46.376 70.376 45.701 70.402 45.028 70.402 z M 44.969 26.598 c -0.489 0 -0.979 0.02 -1.471 0.058 c -8.899 0.702 -16.14 7.943 -16.842 16.843 c -0.427 5.41 1.516 10.7 5.331 14.515 s 9.1 5.761 14.516 5.331 l 0 0 c 8.899 -0.701 16.141 -7.941 16.843 -16.842 c 0.427 -5.41 -1.517 -10.701 -5.331 -14.516 C 54.546 28.519 49.857 26.598 44.969 26.598 z"
+                                Fill="{AppThemeBinding Dark=White,
+                                                       Light=Black}"
+                                HeightRequest="26"
+                                StrokeThickness=".5"
+                                WidthRequest="26" />
+                            <Label
+                                FontAttributes="Bold"
+                                FontSize="15"
+                                HorizontalOptions="StartAndExpand"
+                                IsVisible="{OnIdiom Default=True,
+                                                    Phone=false}"
+                                Text="Find Unfollowers"
+                                VerticalOptions="CenterAndExpand" />
+                        </StackLayout>
+                        <sh:MaterialFrame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding FindUnfollowersViewCommand}" />
+                        </sh:MaterialFrame.GestureRecognizers>
+                    </sh:MaterialFrame>
+
+                    <StackLayout
+                        Padding="0"
+                        HeightRequest="40"
+                        HorizontalOptions="Fill"
+                        IsClippedToBounds="True"
+                        MinimumWidthRequest="{OnIdiom Default=120,
+                                                      Phone=40}"
+                        VerticalOptions="EndAndExpand"
+                        WidthRequest="{OnIdiom Default=120,
+                                               Phone=40}">
+                        <Entry
+                            Margin="0"
+                            Placeholder="UserName"
+                            Text="{Binding InputUserName}"
+                            WidthRequest="120" />
+                    </StackLayout>
+
+                    <sh:MaterialFrame
+                        Padding="0"
+                        xct:TouchEffect.NativeAnimation="True"
+                        xct:TouchEffect.NativeAnimationRadius="5"
+                        CornerRadius="{OnIdiom Phone=20,
+                                               Default=5}"
                         HasShadow="True"
                         HeightRequest="40"
                         HorizontalOptions="EndAndExpand"
@@ -306,7 +344,17 @@
                     </sh:MaterialFrame>
                 </StackLayout>
             </sh:MaterialFrame>
+
+
+            <AbsoluteLayout IsVisible="{Binding ResultEdiorVisibility}">
+                <Editor
+                    Margin="100"
+                    AbsoluteLayout.LayoutBounds="1,1,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Text="{Binding UnfollowersStringArray}" />
+            </AbsoluteLayout>
         </Grid>
+
     </sh:MaterialFrame>
     <VisualStateManager.VisualStateGroups>
         <VisualStateGroupList>
@@ -341,9 +389,17 @@
                         <Setter TargetName="fullname" Property="Label.WidthRequest" Value="{OnIdiom Phone=240, Desktop=220}" />
                         <Setter TargetName="profile" Property="Image.HeightRequest" Value="{OnIdiom Phone=50, Default=80}" />
                         <Setter TargetName="profile" Property="Image.WidthRequest" Value="{OnIdiom Phone=50, Default=80}" />
-                        <Setter TargetName="profileframe" Property="Frame.HeightRequest" Value="{OnIdiom Phone=50, Default=80}" />
-                        <Setter TargetName="profileframe" Property="Frame.WidthRequest" Value="{OnIdiom Phone=50, Default=80}" />
-                        <Setter TargetName="profileframe" Property="Frame.CornerRadius" Value="{OnIdiom Phone=25, Default=40}" />
+                        <Setter TargetName="profile" Property="Image.Clip">
+                            <Setter.Value>
+                                <EllipseGeometry
+                                    Center="{OnIdiom Phone='25,25',
+                                                     Default='40,40'}"
+                                    RadiusX="{OnIdiom Phone=25,
+                                                      Default=40}"
+                                    RadiusY="{OnIdiom Phone=25,
+                                                      Default=40}" />
+                            </Setter.Value>
+                        </Setter>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
