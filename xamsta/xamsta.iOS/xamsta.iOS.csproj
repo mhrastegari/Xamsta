@@ -14,7 +14,7 @@
     <AssemblyName>xamsta.iOS</AssemblyName>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <ProvisioningType>automatic</ProvisioningType>
+    <ProvisioningType>manual</ProvisioningType>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,8 +63,9 @@
     <MtouchArch>ARM64</MtouchArch>
     <CodesignKey>iPhone Developer</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <MtouchSdkVersion>14.5</MtouchSdkVersion>
-    <MtouchLink>Full</MtouchLink>
+    <MtouchSdkVersion>
+    </MtouchSdkVersion>
+    <MtouchLink>None</MtouchLink>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Main.cs" />
@@ -129,13 +130,13 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs">
-      <Version>7.2.0.562</Version>
+      <Version>7.2.0.564</Version>
     </PackageReference>
     <PackageReference Include="ContextMenuContainer">
       <Version>1.0.8</Version>
     </PackageReference>
     <PackageReference Include="InstagramApiSharp">
-      <Version>1.7.1</Version>
+      <Version>1.7.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp">
       <Version>4.7.0</Version>
@@ -149,16 +150,16 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
-      <Version>2.0.0.12</Version>
+      <Version>2.1.0</Version>
     </PackageReference>
     <PackageReference Include="Sharpnado.MaterialFrame">
       <Version>1.3.0</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>2.0.0</Version>
+      <Version>2.0.4</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
     <PackageReference Include="Xamarin.Forms.Nuke">
       <Version>10.3.1</Version>
     </PackageReference>

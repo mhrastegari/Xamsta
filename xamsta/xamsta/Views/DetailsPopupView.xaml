@@ -97,6 +97,8 @@
                         </StackLayout>
                     </StackLayout>
                     <Frame
+                        Padding="{OnPlatform macOS='0,-6,0,6',
+                                             Default=0}"
                         xct:TouchEffect.NativeAnimation="True"
                         CornerRadius="17"
                         HasShadow="False"

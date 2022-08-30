@@ -67,7 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Acr.UserDialogs">
-      <Version>7.2.0.562</Version>
+      <Version>7.2.0.564</Version>
     </PackageReference>
     <PackageReference Include="ContextMenuContainer">
       <Version>1.0.8</Version>
@@ -76,7 +76,7 @@
       <Version>2.1.1.648</Version>
     </PackageReference>
     <PackageReference Include="InstagramApiSharp">
-      <Version>1.7.1</Version>
+      <Version>1.7.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.CSharp">
       <Version>4.7.0</Version>
@@ -90,23 +90,29 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
-      <Version>2.0.0.12</Version>
+      <Version>2.1.0</Version>
     </PackageReference>
     <PackageReference Include="Sharpnado.MaterialFrame">
       <Version>1.3.0</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.Core">
+      <Version>[1.7.0.2]</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.AndroidX.MediaRouter">
+      <Version>[1.3.0]</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Google.Guava" ExcludeAssets="all">
-      <Version>29.0.0</Version>
+      <Version>31.1.0.3</Version>
       <IncludeAssets>none</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData">
-      <Version>2.3.1.3</Version>
+      <Version>2.5.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.CommunityToolkit">
-      <Version>2.0.0</Version>
+      <Version>2.0.4</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
-    <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2515" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
