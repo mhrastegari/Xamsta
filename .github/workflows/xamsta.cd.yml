@@ -6,8 +6,9 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
 
+  build_xamsta_android:
+    name: build xamsta android
     runs-on: macos-latest
 
     steps:
