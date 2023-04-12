@@ -23,7 +23,7 @@ jobs:
         dotnet-version: '5.x'
 
     - name: Install dependencies
-      run: nuget restore xamsta.sln
+      run: dotnet restore xamsta.sln
 
     - name: Build
       run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release
