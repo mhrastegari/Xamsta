@@ -8,22 +8,22 @@ on:
 jobs:
 
   build_xamsta_android:
-    name: build xamsta android
+    name: Build Xamsta Android
     runs-on: macos-latest
 
     steps:
     - uses: actions/checkout@v3
     - name: Set default Xamarin SDK versions
       run: |
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --android=13
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --android=12.0
 
-    - name: Setup .NET Core SDK 5.0.x
+    - name: Setup .NET Core SDK 5.x
       uses: actions/setup-dotnet@v3
       with:
-        dotnet-version: '5.0.x'
+        dotnet-version: '5.x'
 
     - name: Install dependencies
-      run: nuget restore xamsta.sln
+      run: dotnet restore xamsta.sln
 
     - name: Build
-      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Debug
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release
