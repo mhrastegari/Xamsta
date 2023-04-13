@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <resources>
-  <style name="MainTheme" parent="MainTheme.Base"><item name="colorAccent">#2196F3</item>
+  <style name="MainTheme" parent="MainTheme.Base">
+		<item name="colorAccent">#2196F3</item>
 	  <item name="android:navigationBarColor">@android:color/black</item>
 	  <item name="android:windowTranslucentStatus">true</item>
 	  <item name="android:colorControlNormal">#7a7a7a</item>
