@@ -3,9 +3,9 @@ name: Xamsta CI
 on:
   workflow_dispatch:
   push:
-    branches: ["master"]
+    branches: [ "master" ]
   pull_request:
-    branches: ["master"]
+    branches: [ "master" ]
 
 jobs:
   build_xamsta_android:
@@ -42,7 +42,7 @@ jobs:
     - uses: actions/checkout@v3
     - name: Set default Xamarin SDK versions
       run: |
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=14.6
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=14.8
     
     - name: Set default Xcode 13.5
       run: |
