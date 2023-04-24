@@ -27,7 +27,7 @@ jobs:
         uses: NuGet/setup-nuget@v1.2.0
 
       - name: Restore nuget packages
-        run: nuget restore xamsta.sln
+        run: nuget restore xamsta/xamsta.Android/xamsta.Android.csproj
 
       - name: Build
         run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release
