@@ -44,9 +44,9 @@ jobs:
       run: |
         $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=15.0
     
-    - name: Set default Xcode 13.0
+    - name: Set default Xcode 13.2.1
       run: |
-        XCODE_ROOT=/Applications/Xcode_13.0.0.app
+        XCODE_ROOT=/Applications/Xcode_13.2.1.app
         echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
         sudo xcode-select -s $XCODE_ROOT
 
