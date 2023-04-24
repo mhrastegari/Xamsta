@@ -23,7 +23,10 @@ jobs:
         with:
           dotnet-version: "5.x"
 
-      - name: Install dependencies
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1.2.0
+
+      - name: Restore nuget packages
         run: nuget restore xamsta.sln
 
       - name: Build
