@@ -33,3 +33,35 @@ jobs:
 
       - name: Build
         run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release /restore
+  
+  build_xamsta_ios:
+    name: Build Xamsta iOS
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set default Xamarin SDK versions
+      run: |
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=14.5
+    
+    - name: Set default Xcode 13.5
+      run: |
+        XCODE_ROOT=/Applications/Xcode_13.5.0.app
+        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+        sudo xcode-select -s $XCODE_ROOT
+
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
+
+    - name: Restore nuget packages
+      run: nuget restore xamsta.sln
+
+    - name: Build
+      run: msbuild xamsta/xamsta.iOS/xamsta.iOS.csproj /p:Configuration=Debug /p:Platform=iPhoneSimulator /t:Rebuild
