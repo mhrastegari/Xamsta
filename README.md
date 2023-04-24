@@ -1,7 +1,14 @@
 # Xamsta
 
-Xamsta is an unofficial instagram client for iOS, macOS, Android and Windows Devices which can help you to find your unfollowers.
+Xamsta is an unofficial instagram client for iOS, macOS, Android and Windows Devices which can help you to find your unfollowers. 
+<br/>
 This app has been developed via [Xamarin.Forms][8].
+
+## Build status
+
+| Platforms | Status |
+| --------- | ------ |
+| Full Build | [![Xamsta CI](https://github.com/mhrastegari/Xamsta/actions/workflows/xamsta.ci.yml/badge.svg)](https://github.com/mhrastegari/Xamsta/blob/master/.github/workflows/xamsta.ci.yml) |
 
 # Screenshots
 
