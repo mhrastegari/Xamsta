@@ -64,4 +64,4 @@ jobs:
       run: nuget restore xamsta.sln
 
     - name: Build
-      run: msbuild xamsta/xamsta.iOS/xamsta.iOS.csproj /p:Configuration=Debug /p:Platform=iPhoneSimulator /t:Rebuild
+      run: msbuild xamsta/xamsta.iOS/xamsta.iOS.csproj /p:Configuration=Debug /p:Platform=iPhoneSimulator /t:Rebuild /restore
