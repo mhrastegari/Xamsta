@@ -3,9 +3,9 @@ name: Xamsta CI
 on:
   workflow_dispatch:
   push:
-    branches: [ "master" ]
+    branches: ["master"]
   pull_request:
-    branches: [ "master" ]
+    branches: ["master"]
 
 jobs:
   build_xamsta_android:
@@ -26,10 +26,10 @@ jobs:
       - name: Setup NuGet
         uses: NuGet/setup-nuget@v1.2.0
         with:
-          nuget-version: 'latest'
+          nuget-version: "latest"
 
       - name: Restore nuget packages
         run: nuget restore xamsta.sln
 
       - name: Build
-        run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release
+        run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release /restore
