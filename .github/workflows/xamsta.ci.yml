@@ -87,5 +87,5 @@ jobs:
     - name: Restore nuget packages
       run: nuget restore xamsta.sln
     
-    - name: Build UWP Project
+    - name: Build
       run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x64 /p:Configuration=Debug /p:AppxPackageSigningEnabled=false /restore
