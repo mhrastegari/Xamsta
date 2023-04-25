@@ -102,4 +102,4 @@ jobs:
       run: nuget restore xamsta.sln
 
     - name: Build
-      run: msbuild msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Debug /p:Platform=x86 /t:Rebuild /restore
+      run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Debug /p:Platform=x86 /t:Rebuild /restore
