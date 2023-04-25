@@ -92,3 +92,25 @@ jobs:
     
     - name: Build
       run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x86 /p:Configuration=Debug /p:AppxPackageSigningEnabled=false /t:Rebuild /restore
+
+  build-macos:
+    name: Build Xamsta macOS
+    runs-on: macos-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '5.0.x'
+
+    - name: Set default Xamarin SDK versions
+      run: |
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --mac=7.0
+    
+    - name: Install dependencies
+      run: nuget restore <sln_file_path>
+
+    - name: Build
+      run: msbuild <project_file_path> /p:Configuration=Debug /p:Platform=x86 /t:Rebuild
