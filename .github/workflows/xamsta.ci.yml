@@ -107,10 +107,21 @@ jobs:
 
     - name: Set default Xamarin SDK versions
       run: |
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --mac=7.0
+        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --mac=11.3
+
+    - name: Set default Xcode 13.2.1
+      run: |
+        XCODE_ROOT=/Applications/Xcode_13.2.1.app
+        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+        sudo xcode-select -s $XCODE_ROOT
     
-    - name: Install dependencies
-      run: nuget restore <sln_file_path>
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
+
+    - name: Restore nuget packages
+      run: nuget restore xamsta.sln
 
     - name: Build
-      run: msbuild <project_file_path> /p:Configuration=Debug /p:Platform=x86 /t:Rebuild
+      run: msbuild msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Debug /p:Platform=x86 /t:Rebuild /restore
