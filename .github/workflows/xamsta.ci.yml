@@ -65,3 +65,28 @@ jobs:
 
     - name: Build
       run: msbuild xamsta/xamsta.iOS/xamsta.iOS.csproj /p:Configuration=Debug /p:Platform=iPhoneSimulator /t:Rebuild /restore
+
+  build_xamsta_uwp:
+    name: Build Xamsta UWP
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Setup Nuget.exe 
+      uses: nuget/setup-nuget@v1.2.0
+
+    - name: NuGet Restore - Class Library Project
+      run: nuget restore xamsta/xamsta/xamsta.csproj -ConfigFile xamsta/nuget.config
+
+    - name: NuGet Restore - Platform Project
+      run: nuget restore xamsta/xamsta.UWP/xamsta.UWP.csproj -ConfigFile xamsta/nuget.config
+    
+    - name: Build UWP Project
+      run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x64 /p:Configuration=Debug /p:AppxPackageSigningEnabled=false /restore
