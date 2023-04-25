@@ -78,14 +78,13 @@ jobs:
     
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.3.1
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
 
-    - name: Setup Nuget.exe 
-      uses: nuget/setup-nuget@v1.2.0
-
-    - name: NuGet Restore - Class Library Project
-      run: nuget restore xamsta/xamsta/xamsta.csproj -ConfigFile xamsta/nuget.config
-
-    - name: NuGet Restore - Platform Project
+    - name: Restore nuget packages
       run: nuget restore xamsta/xamsta.UWP/xamsta.UWP.csproj -ConfigFile xamsta/nuget.config
     
     - name: Build UWP Project
