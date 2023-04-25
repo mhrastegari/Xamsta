@@ -14,9 +14,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      - name: Set default Xamarin SDK versions
-        run: |
-          $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --android=12.0
 
       - name: Setup .NET Core SDK 5.x
         uses: actions/setup-dotnet@v3
@@ -40,15 +37,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set default Xamarin SDK versions
-      run: |
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --ios=15.0
-    
-    - name: Set default Xcode 13.2.1
-      run: |
-        XCODE_ROOT=/Applications/Xcode_13.2.1.app
-        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-        sudo xcode-select -s $XCODE_ROOT
 
     - name: Setup .NET Core SDK 5.0.x
       uses: actions/setup-dotnet@v3
@@ -104,16 +92,6 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: '5.0.x'
-
-    - name: Set default Xamarin SDK versions
-      run: |
-        $VM_ASSETS/select-xamarin-sdk-v2.sh --mono=6.12 --mac=11.3
-
-    - name: Set default Xcode 13.2.1
-      run: |
-        XCODE_ROOT=/Applications/Xcode_13.2.1.app
-        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
-        sudo xcode-select -s $XCODE_ROOT
     
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.2.0
