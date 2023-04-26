@@ -13,30 +13,34 @@ jobs:
     runs-on: macos-latest
 
     steps:
-      - uses: actions/checkout@v3
 
-      - name: Setup .NET Core SDK 5.x
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: "5.x"
+    - name: Checkout source code
+      uses: actions/checkout@v2
 
-      - name: Setup NuGet
-        uses: NuGet/setup-nuget@v1.2.0
-        with:
-          nuget-version: "latest"
+    - name: Setup .NET Core SDK 5.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: "5.x"
 
-      - name: Restore nuget packages
-        run: nuget restore xamsta.sln
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
 
-      - name: Build
-        run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release /restore
+    - name: Restore nuget packages
+      run: nuget restore xamsta.sln
+
+    - name: Build
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /t:PackageForAndroid /p:Configuration=Release /restore
   
   build_xamsta_ios:
     name: Build Xamsta iOS
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v3
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
 
     - name: Setup .NET Core SDK 5.0.x
       uses: actions/setup-dotnet@v3
@@ -59,8 +63,9 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@v3
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
     
     - name: Setup .NET Core SDK 5.0.x
       uses: actions/setup-dotnet@v3
@@ -86,7 +91,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+
+    - name: Checkout source code
+      uses: actions/checkout@v2
     
     - name: Setup .NET Core SDK 5.0.x
       uses: actions/setup-dotnet@v3
@@ -102,4 +109,4 @@ jobs:
       run: nuget restore xamsta.sln
 
     - name: Build
-      run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Debug /t:Rebuild /v:diag /restore
+      run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Debug /p:CreatePackage=false /t:Rebuild /restore
