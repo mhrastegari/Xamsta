@@ -94,7 +94,13 @@ jobs:
 
     - name: Checkout source code
       uses: actions/checkout@v2
-    
+      
+    - name: Set default Xcode 14.0.1
+      run: |
+        XCODE_ROOT=/Applications/Xcode_14.0.1.app
+        echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+        sudo xcode-select -s $XCODE_ROOT
+        
     - name: Setup .NET Core SDK 5.0.x
       uses: actions/setup-dotnet@v3
       with:
