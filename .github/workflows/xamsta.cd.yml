@@ -42,11 +42,8 @@ jobs:
       with:
         nuget-version: "latest"
 
-    - name: NuGet Restore - Xamarin.Forms Project
-      run: nuget restore ${{ env.XF_PATH }} -ConfigFile ${{ env.NUGETCONFIG_PATH }}
-
-    - name: NuGet Restore - Platform Project
-      run: nuget restore xamsta/xamsta.UWP/xamsta.UWP.csproj -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+    - name: Restore nuget packages
+      run: nuget restore xamsta.sln
     
     - name: Build UWP Project
       run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x64 /p:Configuration=Debug /p:AppxPackageSigningEnabled=false
@@ -86,14 +83,11 @@ jobs:
       with:
         nuget-version: "latest"
 
-    - name: NuGet Restore - Xamarin.Forms Project
-      run: nuget restore ${{ env.XF_PATH }} -ConfigFile ${{ env.NUGETCONFIG_PATH }}
-
-    - name: NuGet Restore - Platform Project
-      run: nuget restore xamsta/xamsta.Android/xamsta.Android.csproj -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+    - name: Restore nuget packages
+      run: nuget restore xamsta.sln
     
     - name: Build Android Project
-      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:SolutionDir=xamsta /p:Configuration=Debug /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Debug /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
@@ -109,6 +103,12 @@ jobs:
      
      - name: Checkout source code
        uses: actions/checkout@v3
+
+     - name: Set default Xcode 14.0.1
+       run: |
+         XCODE_ROOT=/Applications/Xcode_14.0.1.app
+         echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+         sudo xcode-select -s $XCODE_ROOT
         
      - name: Setup .NET Core SDK 5.0.x
        uses: actions/setup-dotnet@v3
@@ -124,15 +124,17 @@ jobs:
          ver="${buildDay}.${runNum}.0"
          echo $ver
          echo "APP_VERSION=$ver" >> $GITHUB_ENV
+    
+     - name: Setup NuGet
+       uses: NuGet/setup-nuget@v1.2.0
+       with:
+         nuget-version: "latest"
 
-     - name: NuGet Restore - Xamarin.Forms Project
-       run: nuget restore ${{ env.XF_PATH }} -ConfigFile ${{ env.NUGETCONFIG_PATH }}
-
-     - name: NuGet Restore - Platform Project
-       run: nuget restore xamsta/xamsta.macOS/xamsta.macOS.csproj -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+     - name: Restore nuget packages
+       run: nuget restore xamsta.sln
     
      - name: Build macOS Project
-       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:SolutionDir=xamsta /p:Configuration=Debug /p:CreatePackage=true /verbosity:normal /t:Rebuild    
+       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Debug /p:CreatePackage=true /verbosity:normal /t:Rebuild    
      
      - name: Upload build artifacts
        uses: actions/upload-artifact@v2
