@@ -1,0 +1,139 @@
+name: Xamsta CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+
+env:
+  XF_PATH: "xamsta/xamsta/xamsta.csproj"
+  NUGETCONFIG_PATH: "xamsta/nuget.config"
+
+jobs:
+
+  build_xamsta_windows:
+    name: Build Xamsta Windows
+    runs-on: windows-latest
+  
+    steps:
+     
+    - name: Checkout source code
+      uses: actions/checkout@v3
+        
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '5.0.x'
+        
+    - name: Generate version number
+      shell: pwsh
+      run: |
+        $buildDay = Get-Date -Format "yyyy.Mdd"
+        $ver = $buildDay + "." + $env:GITHUB_RUN_NUMBER + ".0"
+        echo "APP_VERSION=$ver" >> $GITHUB_ENV
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
+
+    - name: NuGet Restore - Xamarin.Forms Project
+      run: nuget restore ${{ env.XF_PATH }} -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+
+    - name: NuGet Restore - Platform Project
+      run: nuget restore xamsta/xamsta.UWP/xamsta.UWP.csproj -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+    
+    - name: Build UWP Project
+      run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x64 /p:Configuration=Debug /p:AppxPackageSigningEnabled=false
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: UWP Artifacts
+        path: xamsta/xamsta.UWP/bin
+  
+  build_xamsta_android:
+    name: Build Xamsta Android
+    runs-on: windows-latest
+
+    steps:
+     
+    - name: Checkout source code
+      uses: actions/checkout@v3
+        
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '5.0.x'
+        
+    - name: Generate version number
+      shell: pwsh
+      run: |
+        $buildDay = Get-Date -Format "yyyy.Mdd"
+        $ver = $buildDay + "." + $env:GITHUB_RUN_NUMBER + ".0"
+        echo "APP_VERSION=$ver" >> $GITHUB_ENV
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
+
+    - name: NuGet Restore - Xamarin.Forms Project
+      run: nuget restore ${{ env.XF_PATH }} -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+
+    - name: NuGet Restore - Platform Project
+      run: nuget restore xamsta/xamsta.Android/xamsta.Android.csproj -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+    
+    - name: Build Android Project
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:SolutionDir=xamsta /p:Configuration=Debug /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: Android Artifacts
+        path: xamsta/xamsta.Android/bin
+  
+  build_xamsta_macos:
+     name: Build Xamsta macOS
+     runs-on: macos-latest
+
+     steps:
+     
+     - name: Checkout source code
+       uses: actions/checkout@v3
+        
+     - name: Setup .NET Core SDK 5.0.x
+       uses: actions/setup-dotnet@v3
+       with:
+         dotnet-version: '5.0.x'
+        
+     - name: Generate version number
+       shell: bash
+       run: |
+         buildDay=`date +%Y.%m%d`
+         echo $buildDay
+         runNum=${{ github.run_number }}
+         ver="${buildDay}.${runNum}.0"
+         echo $ver
+         echo "APP_VERSION=$ver" >> $GITHUB_ENV
+
+     - name: NuGet Restore - Xamarin.Forms Project
+       run: nuget restore ${{ env.XF_PATH }} -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+
+     - name: NuGet Restore - Platform Project
+       run: nuget restore xamsta/xamsta.macOS/xamsta.macOS.csproj -ConfigFile ${{ env.NUGETCONFIG_PATH }}
+    
+     - name: Build macOS Project
+       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:SolutionDir=xamsta /p:Configuration=Debug /p:CreatePackage=true /verbosity:normal /t:Rebuild    
+     
+     - name: Upload build artifacts
+       uses: actions/upload-artifact@v2
+       with:
+         name: macOS Artifacts
+         path: xamsta/xamsta.macOS/bin
