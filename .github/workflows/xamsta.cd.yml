@@ -42,7 +42,7 @@ jobs:
       run: nuget restore xamsta.sln
     
     - name: Build UWP Project
-      run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x64 /p:Configuration=Debug /p:AppxPackageSigningEnabled=false
+      run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x86 /p:Configuration=Release /p:AppxPackageSigningEnabled=false
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
@@ -83,7 +83,7 @@ jobs:
       run: nuget restore xamsta.sln
     
     - name: Build Android Project
-      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Debug /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Release /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
     
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
@@ -130,7 +130,7 @@ jobs:
        run: nuget restore xamsta.sln
     
      - name: Build macOS Project
-       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Debug /p:CreatePackage=true /verbosity:normal /t:Rebuild    
+       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Release /p:CreatePackage=true /verbosity:normal /t:Rebuild    
      
      - name: Upload build artifacts
        uses: actions/upload-artifact@v2
