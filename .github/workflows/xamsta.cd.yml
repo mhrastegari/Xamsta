@@ -48,7 +48,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: UWP Artifacts
-        path: xamsta/xamsta.UWP/bin
+        path: xamsta/xamsta.UWP/bin/x86/Release/*x86.msix
   
   build_xamsta_android:
     name: Build Xamsta Android
@@ -89,7 +89,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Android Artifacts
-        path: xamsta/xamsta.Android/bin
+        path: xamsta/xamsta.Android/bin/Release/*Signed.apk
   
   build_xamsta_macos:
      name: Build Xamsta macOS
@@ -130,10 +130,10 @@ jobs:
        run: nuget restore xamsta.sln
     
      - name: Build macOS Project
-       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Release /p:CreatePackage=true /verbosity:normal /t:Rebuild    
+       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Release /p:Platform=AnyCPU /p:CreatePackage=true /verbosity:normal /t:Rebuild /restore  
      
      - name: Upload build artifacts
        uses: actions/upload-artifact@v2
        with:
          name: macOS Artifacts
-         path: xamsta/xamsta.macOS/bin
+         path: xamsta/xamsta.macOS/bin/Release/xamsta.macOS.app
