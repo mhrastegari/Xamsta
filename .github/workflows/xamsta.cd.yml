@@ -89,7 +89,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: Android Artifacts
-        path: xamsta/xamsta.Android/bin/Release/*Signed.apk
+        path: xamsta/xamsta.Android/bin/Release/*.apk
   
   build_xamsta_macos:
      name: Build Xamsta macOS
