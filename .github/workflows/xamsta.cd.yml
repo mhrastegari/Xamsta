@@ -91,10 +91,10 @@ jobs:
 
     - name: Restore nuget packages
       run: nuget restore xamsta.sln
-    
+      
     - name: Build Android Project
-      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Release /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
-    
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Release /p:Platform=AnyCPU /verbosity:normal /t:Rebuild /p:OutputPath=xamsta/xamsta.Android/bin/Release/
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v2
       with:
