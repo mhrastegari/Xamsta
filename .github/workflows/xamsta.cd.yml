@@ -1,0 +1,151 @@
+name: Xamsta CD
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build_xamsta_windows:
+    name: Build Xamsta Windows
+    runs-on: windows-latest
+  
+    steps:
+     
+    - name: Checkout source code
+      uses: actions/checkout@v3
+        
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '5.0.x'
+        
+    - name: Generate version number
+      shell: pwsh
+      run: |
+        $buildDay = Get-Date -Format "yyyy.Mdd"
+        $ver = $buildDay + "." + $env:GITHUB_RUN_NUMBER + ".0"
+        echo "APP_VERSION=$ver" >> $GITHUB_ENV
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
+
+    - name: Restore nuget packages
+      run: nuget restore xamsta.sln
+    
+    - name: Build UWP Project
+      run: msbuild xamsta/xamsta.UWP/xamsta.UWP.csproj /p:Platform=x86 /p:Configuration=Release /p:AppxPackageSigningEnabled=false
+    
+    - name: Upload build artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: UWP Artifacts
+        path: xamsta/xamsta.UWP/bin/x86/Release/*x86.msix
+  
+  build_xamsta_android:
+    name: Build Xamsta Android
+    runs-on: windows-latest
+
+    steps:
+     
+    - name: Checkout source code
+      uses: actions/checkout@v3
+        
+    - name: Setup .NET Core SDK 5.0.x
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: '5.0.x'
+        
+    - name: Generate version number
+      shell: pwsh
+      run: |
+        $buildDay = Get-Date -Format "yyyy.Mdd"
+        $ver = $buildDay + "." + $env:GITHUB_RUN_NUMBER + ".0"
+        echo "APP_VERSION=$ver" >> $GITHUB_ENV
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.3.1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.2.0
+      with:
+        nuget-version: "latest"
+
+    - name: Set up JDK 11
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'adopt'
+        java-version: '11'
+
+    - name: Set JAVA_HOME
+      run: |
+        echo "JAVA_HOME=C:\path\to\jdk-11" >> $GITHUB_ENV
+
+    - name: Restore nuget packages
+      run: nuget restore xamsta.sln
+      
+    - name: Build Android Project
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Release /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
+
+    - name: Recursive File Upload
+      uses: actions/upload-artifact@v2
+      with:
+        name: Android Artifacts
+        path: |
+          xamsta/xamsta.Android/bin/Release/**/*.apk
+        if-no-files-found: warn
+  
+  build_xamsta_macos:
+     name: Build Xamsta macOS
+     runs-on: macos-latest
+
+     steps:
+     
+     - name: Checkout source code
+       uses: actions/checkout@v3
+
+     - name: Set default Xcode 14.0.1
+       run: |
+         XCODE_ROOT=/Applications/Xcode_14.0.1.app
+         echo "MD_APPLE_SDK_ROOT=$XCODE_ROOT" >> $GITHUB_ENV
+         sudo xcode-select -s $XCODE_ROOT
+        
+     - name: Setup .NET Core SDK 5.0.x
+       uses: actions/setup-dotnet@v3
+       with:
+         dotnet-version: '5.0.x'
+        
+     - name: Generate version number
+       shell: bash
+       run: |
+         buildDay=`date +%Y.%m%d`
+         echo $buildDay
+         runNum=${{ github.run_number }}
+         ver="${buildDay}.${runNum}.0"
+         echo $ver
+         echo "APP_VERSION=$ver" >> $GITHUB_ENV
+    
+     - name: Setup NuGet
+       uses: NuGet/setup-nuget@v1.2.0
+       with:
+         nuget-version: "latest"
+
+     - name: Restore nuget packages
+       run: nuget restore xamsta.sln
+    
+     - name: Build macOS Project
+       run: msbuild xamsta/xamsta.macOS/xamsta.macOS.csproj /p:Configuration=Release /p:Platform=AnyCPU /p:CreatePackage=true /verbosity:normal /t:Rebuild /restore  
+     
+     - name: Upload build artifacts
+       uses: actions/upload-artifact@v2
+       with:
+         name: macOS Artifacts
+         path: xamsta/xamsta.macOS/bin/Release/xamsta.macOS.app
