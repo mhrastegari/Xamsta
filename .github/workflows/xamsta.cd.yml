@@ -93,13 +93,15 @@ jobs:
       run: nuget restore xamsta.sln
       
     - name: Build Android Project
-      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Release /p:Platform=AnyCPU /verbosity:normal /t:Rebuild /p:OutputPath=xamsta/xamsta.Android/bin/Release/
+      run: msbuild xamsta/xamsta.Android/xamsta.Android.csproj /p:Configuration=Release /p:Platform=AnyCPU /verbosity:normal /t:Rebuild
 
-    - name: Upload build artifacts
+    - name: Recursive File Upload
       uses: actions/upload-artifact@v2
       with:
         name: Android Artifacts
-        path: xamsta/xamsta.Android/bin/Release/*.apk
+        path: |
+          xamsta/xamsta.Android/bin/Release/**/*.apk
+        if-no-files-found: warn
   
   build_xamsta_macos:
      name: Build Xamsta macOS
